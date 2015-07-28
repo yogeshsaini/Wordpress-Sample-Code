@@ -1,0 +1,50 @@
+.plupload-thumbs .thumb{width:50px;padding-right:5px;float:left}
+.plupload-thumbs .thumb img{width:50px;height:50px}
+.ui-sortable .thumb img{cursor:pointer}
+#full_wrapper h2{ font-size:24px; color:#1c8dc4; margin-bottom:10px; }
+#full_wrapper .filelist, #full_wrapper .plupload-thumbs{ width:96%; margin:0 auto; }
+#full_wrapper .file{ width:97.1%; float:left; padding:10px 15px; font-size:14px; margin-bottom:6px; background:#fff;}
+#full_wrapper .file .file_name{ width:30%; float:left; text-align:left;}
+#full_wrapper .file .file_progress_wrapper{ width:30%; float:left; }
+#full_wrapper .file .seco_progress_wrapper{ width:86%; float:left;  }
+#full_wrapper .file .fileprogress{ height:22px;}
+#full_wrapper .file .file_progress_wrapper.prog_comp .fileprogress{background:#64a53a; text-align:center; color:#fff; font-size:11px; 
+font-weight:bold;}
+#full_wrapper .file .file_progress_wrapper.prog_comp .pro_text{ margin-left:2%; font-size:11px; color:#64a53a; }
+#full_wrapper .file .file_progress_wrapper.up_prog_load .fileprogress{ background:#0074a2; }
+#full_wrapper .file .file_progress_wrapper.up_prog_load .pro_text{ margin-left:2%; font-size:11px; color:#0074a2; }
+
+#full_wrapper .file .file_progress_wrapper.error_upload .fileprogress{ background:#d85117; }
+#full_wrapper .file .file_progress_wrapper.error_upload .pro_text{ margin-left:2%; font-size:11px; color:#d85117; }
+
+#full_wrapper .file .file_size{ width:30%; float:left; text-align:center; }
+#full_wrapper .file .file_action{ width:10%; float:left; text-align:right;}
+#full_wrapper .file .file_action a.remove_file_action{ text-decoration:none; color:#aa0000;}
+#full_wrapper .file .file_action a.edit_file_action{ color:#0074a2; text-decoration:none; }
+#full_wrapper .action_wrappers{display:none; }
+#full_wrapper > ul.upload_desc{width:96%; margin:20px auto 0;}
+#full_wrapper > ul.upload_desc li{ font-size:11px; margin-bottom:0; }
+#full_wrapper #plupload-upload-ui{ border: 5px dashed #d9d9d9; padding:7px 5px; width:98%; float:left; margin-top:20px;}
+#full_wrapper .drag-drop-area{ background:#d9d9d9; height: 215px; }
+#img1plupload-upload-ui input[type="button"]{ background:#f7f7f7; border:1px solid #cccccc; font-size:13px; padding:5px 10px; height:auto;  }
+#full_wrapper .action_wrappers{ float:right; margin:0 25px 0 0; text-align:right; }
+#full_wrapper .action_wrappers a{ width:185px; display:block; text-indent:0; padding:10px 0; background:#39a3cb; border:1px solid #1575a0; border-radius:5px; text-align:center;font-size:14px; font-weight:bold; color:#fff; margin:15px 0 0px 88px; text-decoration:none; }
+#plupload-upload-ui .drop_wrapper{ width:230px; height:90px; position:absolute; left:50%; top:50%; margin:-45px 0 0 -115px; text-align:center;}
+#plupload-upload-ui .drop_wrapper p{ margin:5px 0; font-size:14px;}
+#full_wrapper .main-gallery-container .infomation_form {border-radius:0; background:#FFFFFF; display:table; position:relative; width: 98%;}
+#full_wrapper .main-gallery-container .infomation_form { position: relative; }
+#full_wrapper .main-gallery-container .infomation_form { border: 1px solid #DDDDDD; padding-left: 0; }
+#full_wrapper .main-gallery-container .infomation_form { background: #FFFFFF; font-size: 14px; }
+#full_wrapper .main-gallery-container .infomation_form { background: #FFFFFF; border-radius: 0; display: table; position: relative; width: 98%; }
+.main-gallery-container .infomation_form .wrap .icon { background: url("../../img/not_connected.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+height: 74px; margin: 50px auto 0; width: 77px; }
+.main-gallery-container .infomation_form .wrap .msg { margin-top: 30px; padding: 0 15px; text-align: center; }
+.main-gallery-container .infomation_form .wrap .link{ margin: 30px 0 20px; text-align: center; }
+.main-gallery-container .infomation_form .wrap .link a{ background: none repeat scroll 0 0 #3AA4CB; border: 1px solid #1676A1; border-radius: 5px;
+color: #FFFFFF; display: inline-block; font-size: 14px; font-weight: bold; padding: 10px 20px;  text-decoration: none; }
+
+#full_wrapper .upload_message{ display:none; width:96%; margin:0 auto 15px; background:#0074a2; padding:15px 0; text-align:center; color:#fff; font-size:14px; }
+#full_wrapper .upload_message span.up_image{ width:21px; height:21px; background: url("../../img/alert_icon.png"); margin-right:15px; display:inline-block; vertical-align:middle;}
+#full_wrapper .upload_message span.bold{ font-weight:bold; }
+
+#full_wrapper .upload_error_message{ background:#d85117; padding:15px 0; }

@@ -1,0 +1,304 @@
+<?php
+include_once("Sample.php");
+
+class SampleOwnMethod
+{
+    
+    //Variable for sample
+    protected $dm_api_key;
+    protected $dm_app_secret;
+    protected $dm_uid;
+    protected $dm_pass;
+    
+    //variable for servcer
+    protected $client;
+    protected $forward;
+    protected $remote;
+    
+    //For create instance of daliymotion
+    protected $sample;
+    
+    //For retun data
+    public $returndata = array();
+    
+    function __construct()
+    {
+        
+        //$this->dm_api_key    = $dm_api_key;
+        //$this->dm_app_secret = $dm_app_secret;
+        //$this->dm_uid        = $dm_uid;
+        //$this->dm_pass       = $dm_pass;
+        $this->client  = @$_SERVER['HTTP_CLIENT_IP'];
+        $this->forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+        $this->remote  = $_SERVER['REMOTE_ADDR'];
+        
+        $this->sample = new Sample();
+        
+        //return $this;
+    }
+    
+    
+    public function getSampleChannelList()
+    {
+        $result = $this->sample->get('/channels', array(
+            'fields' => array(
+                'id',
+                'name'
+            )
+        ));
+        
+        if (isset($result['list']) && !empty($result['list'])) {
+            foreach ($result['list'] as $media) {
+                $this->returndata[$media['id']] = $media['name'];
+            }
+        }
+        
+        return ($this->returndata);
+    }
+    
+    public function getSampleVideoList($flag = NULL, $fields = array('id', 'title', 'embed_url', 'thumbnail_url'), $filter = array(), $page_no = 1, $per_page = 10)
+    {
+        switch ($flag) {
+            case 'all':
+                try {
+                    $result = $this->sample->get('/videos', array(
+                        'fields' => $fields,
+                        'country' => $this->visitorCountry(),
+                        'search' => 'education',
+                        'page' => ($page_no),
+                        'limit' => ($per_page)
+                    ));
+                    
+                    if (isset($result['list']) && !empty($result['list'])) {
+                        foreach ($result['list'] as $key => $media) {
+                            $this->returndata['videos'][$key]['id']            = $media['id'];
+                            $this->returndata['videos'][$key]['title']         = $media['title'];
+                            $this->returndata['videos'][$key]['embed_url']     = $media['embed_url'];
+                            $this->returndata['videos'][$key]['thumbnail_url'] = $media['thumbnail_url'];
+                        }
+                        $this->returndata['total_record'] = !empty($result['total']) ? $result['total'] : null;
+                        $this->returndata['has_more']     = !empty($result['has_more']) ? $result['has_more'] : null;
+                    }
+                    
+                    return ($this->returndata);
+                }
+                catch (Exception $e) {
+                    print($e->getMessage());
+                }
+                break;
+            
+            case 'me':
+                try {
+                    
+                    
+                    $result = $this->sample->get('/me/videos', array(
+                        'fields' => $fields,
+                        'page' => ($page_no),
+                        'limit' => ($per_page)
+                    ));
+                    
+                    if (isset($result['list']) && !empty($result['list'])) {
+                        foreach ($result['list'] as $key => $media) {
+                            $this->returndata['videos'][$key]['id']            = $media['id'];
+                            $this->returndata['videos'][$key]['title']         = $media['title'];
+                            $this->returndata['videos'][$key]['embed_url']     = $media['embed_url'];
+                            $this->returndata['videos'][$key]['thumbnail_url'] = $media['thumbnail_url'];
+                        }
+                        $this->returndata['total_record'] = $result['total'];
+                        $this->returndata['has_more']     = $result['has_more'];
+                    }
+                    
+                    return ($this->returndata);
+                }
+                catch (Exception $e) {
+                    print($e->getMessage());
+                }
+                break;
+            
+            case 'commented':
+                try {
+                    $dm_api_key    = '307bebf60601d379dc8b';
+                    $dm_app_secret = 'e80edf7407fc654a387aff0953a418851da0da29';
+                    $apiKey        = $dm_api_key; //$this->dm_api_key;
+                    $apiSecret     = $dm_app_secret; //$this->dm_app_secret;
+                    $this->sample->setGrantType(Sample::GRANT_TYPE_AUTHORIZATION, $apiKey, $apiSecret, array(
+                        'manage_videos'
+                    ));
+                    
+                    $result = $this->sample->get('/me/videos', array(
+                        'fields' => $fields,
+                        'page' => ($page_no),
+                        'limit' => ($per_page),
+                        'sort' => 'commented'
+                    ));
+                    
+                    if (isset($result['list']) && !empty($result['list'])) {
+                        foreach ($result['list'] as $key => $media) {
+                            $this->returndata['videos'][$key]['id']            = $media['id'];
+                            $this->returndata['videos'][$key]['title']         = $media['title'];
+                            $this->returndata['videos'][$key]['embed_url']     = $media['embed_url'];
+                            $this->returndata['videos'][$key]['thumbnail_url'] = $media['thumbnail_url'];
+                        }
+                        $this->returndata['total_record'] = $result['total'];
+                        $this->returndata['has_more']     = $result['has_more'];
+                    }
+                    
+                    return ($this->returndata);
+                }
+                catch (Exception $e) {
+                    print($e->getMessage());
+                }
+                break;
+            
+            case 'rated':
+                try {
+                    $dm_api_key    = '307bebf60601d379dc8b';
+                    $dm_app_secret = 'e80edf7407fc654a387aff0953a418851da0da29';
+                    $apiKey        = $dm_api_key; //$this->dm_api_key;
+                    $apiSecret     = $dm_app_secret; //$this->dm_app_secret;
+                    $this->sample->setGrantType(Sample::GRANT_TYPE_AUTHORIZATION, $apiKey, $apiSecret, array(
+                        'manage_videos'
+                    ));
+                    
+                    $result = $this->sample->get('/me/videos', array(
+                        'fields' => $fields,
+                        'page' => ($page_no),
+                        'limit' => ($per_page),
+                        'sort' => 'rated'
+                    ));
+                    
+                    if (isset($result['list']) && !empty($result['list'])) {
+                        foreach ($result['list'] as $key => $media) {
+                            $this->returndata['videos'][$key]['id']            = $media['id'];
+                            $this->returndata['videos'][$key]['title']         = $media['title'];
+                            $this->returndata['videos'][$key]['embed_url']     = $media['embed_url'];
+                            $this->returndata['videos'][$key]['thumbnail_url'] = $media['thumbnail_url'];
+                        }
+                        $this->returndata['total_record'] = $result['total'];
+                        $this->returndata['has_more']     = $result['has_more'];
+                    }
+                    
+                    return ($this->returndata);
+                }
+                catch (Exception $e) {
+                    print($e->getMessage());
+                }
+                break;
+            
+            case 'visited':
+                try {
+                    $dm_api_key    = '307bebf60601d379dc8b';
+                    $dm_app_secret = 'e80edf7407fc654a387aff0953a418851da0da29';
+                    $apiKey        = $dm_api_key; //$this->dm_api_key;
+                    $apiSecret     = $dm_app_secret; //$this->dm_app_secret;
+                    $this->sample->setGrantType(Sample::GRANT_TYPE_AUTHORIZATION, $apiKey, $apiSecret, array(
+                        'manage_videos'
+                    ));
+                    
+                    $result = $this->sample->get('/me/videos', array(
+                        'fields' => $fields,
+                        'page' => ($page_no),
+                        'limit' => ($per_page),
+                        'sort' => 'visited'
+                    ));
+                    
+                    if (isset($result['list']) && !empty($result['list'])) {
+                        foreach ($result['list'] as $key => $media) {
+                            $this->returndata['videos'][$key]['id']            = $media['id'];
+                            $this->returndata['videos'][$key]['title']         = $media['title'];
+                            $this->returndata['videos'][$key]['embed_url']     = $media['embed_url'];
+                            $this->returndata['videos'][$key]['thumbnail_url'] = $media['thumbnail_url'];
+                        }
+                        $this->returndata['total_record'] = $result['total'];
+                        $this->returndata['has_more']     = $result['has_more'];
+                    }
+                    
+                    return ($this->returndata);
+                }
+                catch (Exception $e) {
+                    print($e->getMessage());
+                }
+                break;
+        }
+    }
+    
+    public function deleteSampleVideo($video_id = null)
+    {
+        try {
+            $dm_api_key    = '307bebf60601d379dc8b';
+            $dm_app_secret = 'e80edf7407fc654a387aff0953a418851da0da29';
+            $apiKey        = $dm_api_key; //$this->dm_api_key;
+            $apiSecret     = $dm_app_secret; //$this->dm_app_secret;
+            $this->sample->setGrantType(Sample::GRANT_TYPE_AUTHORIZATION, $apiKey, $apiSecret, array(
+                'manage_videos'
+            ));
+            
+            $result = $this->sample->delete("/video/$video_id");
+        }
+        catch (Exception $e) {
+            print($e->getMessage());
+        }
+    }
+    
+    
+    public function getSampleVideoDetail($videoId = null, $fields = array('id', 'title', 'embed_url', 'thumbnail_url', 'description', 'tags'))
+    {
+        try {
+            $result = $this->sample->get("/video/$videoId", array(
+                'fields' => $fields
+            ));
+            return $result;
+        }
+        catch (Exception $e) {
+            print($e->getMessage());
+        }
+    }
+    
+    private function visitorCountry()
+    {
+        $result = "";
+        if (filter_var($this->client, FILTER_VALIDATE_IP)) {
+            $ip = $this->client;
+        } elseif (filter_var($this->forward, FILTER_VALIDATE_IP)) {
+            $ip = $this->forward;
+        } else {
+            $ip = $this->remote;
+        }
+        
+        $ip_data = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+        if ($ip_data && $ip_data->geoplugin_countryCode != null) {
+            $result = $ip_data->geoplugin_countryCode;
+        }
+        
+        return !empty($result) ? $result : 'us';
+    }
+    
+    public function updateSampleVideoData($videoId = null, $data = array())
+    {
+        try {
+            $dm_api_key    = '307bebf60601d379dc8b';
+            $dm_app_secret = 'e80edf7407fc654a387aff0953a418851da0da29';
+            $apiKey        = $dm_api_key; //$this->dm_api_key;
+            $apiSecret     = $dm_app_secret; //$this->dm_app_secret;
+            $this->sample->setGrantType(Sample::GRANT_TYPE_AUTHORIZATION, $apiKey, $apiSecret, array(
+                'manage_videos'
+            ));
+            $result = $this->sample->post("/video/$videoId", $data);
+        }
+        catch (Exception $e) {
+            print($e->getMessage());
+        }
+    }
+    
+    public function getAuthorizationUrl($display = 'page')
+    {
+        $dm_api_key    = '307bebf60601d379dc8b';
+        $dm_app_secret = 'e80edf7407fc654a387aff0953a418851da0da29';
+        $apiKey        = $dm_api_key; //$this->dm_api_key;
+        $apiSecret     = $dm_app_secret; //$this->dm_app_secret;
+        $this->sample->setGrantType(Sample::GRANT_TYPE_AUTHORIZATION, $apiKey, $apiSecret, array(
+            'manage_videos'
+        ));
+        return $this->sample->getAuthorizationUrl('page');
+    }
+}

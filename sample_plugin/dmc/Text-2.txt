@@ -1,0 +1,83 @@
+<div class="main-gallery-container">
+   <div id="header-container" class="wrap">
+      <div id="tabs-navigation">
+         <ul>
+            <li><a href="<?php echo SAMPLE_ADMIN_URL; ?>admin.php?page=video-gallery-page" class="active-select"><?php _e( 'My Sample Cloud Video Gallery', 'sample' ); ?></a></li>
+            <li><a href="<?php echo SAMPLE_ADMIN_URL; ?>admin.php?page=dm-video-gallery&flag=me"><?php _e( 'My Sample Video Gallery', 'sample' ); ?></a></li>
+         </ul>
+      </div>
+   </div>
+   <div id="sample_cloud_div" class="infomation_form">
+      <div class="wrap">
+         <div id="sample-cloud">
+            <div class="search-form">
+               <div class="overlay"></div>
+               <div class="loading-image-container"><img alt="ajax-loading" class="ajax-loading-img" src="<?php echo SAMPLE_URL; ?>/img/495.GIF" /></div>
+               <form id="movies-filter" method="get">
+                  <input type="hidden" value="video-gallery-page" name="page">
+                  <!--<input id="sample-search-input" type="text" name="sample_video_title" id="sample-video-title" value="" placeholder="Search my videos"/>
+                  <input type="submit" name="submit" value="Submit">-->
+                     <p class="search-box">
+	<label for="your-element-id-search-input" class="screen-reader-text">Search Table:</label>
+	<input type="search" value="" name="s" id="your-element-id-search-input">
+	<input type="submit" value="Search Table" class="button" id="search-submit" name=""></p>
+                     <input type="hidden" value="video-gallery-page" name="page">
+                     <input id="_wpnonce" type="hidden" value="<?php print wp_create_nonce( 'my-nonce' ); ?>" name="_wpnonce">
+                  <?php  wp_referer_field(); ?>   
+               </form>
+               <div class="dsl-sort">
+                  <form class="filter" name="cloud_sort" method="post" action="">
+                     <label>Sort by</label>
+                     <select name="filter"  id="dsl-filter" onchange="this.form.submit();">
+                     <?php
+                        $selected = isset($_POST['filter']) && !empty($_POST['filter']) ? $_POST['filter'] : '-created'; 
+                        $options = array('-created'=>'Most Recent','meta.title'=>'A-Z','-meta.title'=>'Z-A');
+                        foreach( $options as $key=>$option )
+                               {
+                                   $select = $selected==$key ? ' selected' : null;
+                                   $dropdown .= '<option value="'.$key.'"'.$select.'>'.$option.'</option>'."\n";
+                               }
+                         print $dropdown;
+                        ?>
+                     </select>
+                     <?php
+                        if(isset($_POST['sample_video_title']) && !empty($_POST['sample_video_title'])){
+                            $search_title = $_POST['sample_video_title'];
+                            print '<input type="hidden" name="sample_video_title" value="'.$_POST['sample_video_title'].'"/>';
+                        }
+                        else {
+                            $search_title = '';
+                        }
+                        ?>
+                        <?php  wp_referer_field(); ?>
+                  </form>
+               </div>
+            </div>
+            <div id="samplecloud-display-section">
+               <?php print $this->getSampleCloudVideos($search_title,$selected); ?>
+            </div>
+            <a href="#dm-cloud-edit-form" id="editpopup"></a>
+            <div class="dmc-edit-form-main">
+               <div id="dm-cloud-edit-form" class="dm-cloud-edit-form"></div>
+            </div>
+            <?php $page_links = paginate_links( array(
+               'base' => add_query_arg( 'pagenum', '%#%' ),
+               'format' => '',
+               'prev_text' => __( '&laquo;', 'text-domain' ),
+               'next_text' => __( '&raquo;', 'text-domain' ),
+               'total' => 563,
+               'current' => !empty($_GET['pagenum']) ? $_GET['pagenum'] : 1
+               ) );
+               
+               if ( $page_links ) {
+               echo '<div class="tablenav"><div class="tablenav-pages" style="margin: 1em 0">' . $page_links . '</div></div>';
+               }
+               ?>
+         </div>
+      </div>
+   </div>
+   <div class="icon-help">
+      <span class="dmc-edit"><?php _e( 'Edit', 'sample' ); ?></span>
+      <span class="dmc-delete"><?php _e( 'Delete', 'sample' ); ?></span>
+   </div>
+</div>
