@@ -100,7 +100,7 @@ class Sample
      *                 redirected to this provided URI (the token server will change this).
      * - username:
      * - password: if $type is Sample::GRANT_TYPE_PASSWORD, are used to define end-user credentials.
-     *             If those argument as not provided, the SampleAuthRequiredException exception will
+     *             If those argument as not provided, the Sample_Auth_Required_Exception exception will
      *             be thrown if no valid session is available.
      *
      * @throws InvalidArgumentException if grant type is not supported or grant info is missing with required
@@ -221,7 +221,7 @@ class Sample
      *
      * @throws SampleApiException if API return an error
      * @throws SampleAuthException if can't authenticate the request
-     * @throws SampleAuthRequiredException if not authentication info is available
+     * @throws Sample_Auth_Required_Exception if not authentication info is available
      * @throws SampleTransportException if an error occurs during request.
      */
     public function call($method, $args = array())
@@ -256,7 +256,7 @@ class Sample
             $message = isset($result['error']['message']) ? $result['error']['message'] : null;
             $code    = isset($result['error']['code']) ? $result['error']['code'] : null;
             if ($code === 403) {
-                throw new SampleAuthRequiredException($message, $code);
+                throw new Sample_Auth_Required_Exception($message, $code);
             } else {
                 throw new SampleApiException($message, $code);
             }
@@ -285,7 +285,7 @@ class Sample
      *
      * @return String access token or NULL if not grant type defined (un-authen API calls)
      *
-     * @throws SampleAuthRequiredException can't get access token, client need to request end-user authorization
+     * @throws Sample_Auth_Required_Exception can't get access token, client need to request end-user authorization
      * @throws SampleAuthRefusedException the user refused the authorization
      * @throws SampleAuthException an oauth error occurred
      */
@@ -350,7 +350,7 @@ class Sample
                     throw $e;
                 } else {
                     // Ask the client to request end-user authorization
-                    throw new SampleAuthRequiredException();
+                    throw new Sample_Auth_Required_Exception();
                 }
             } elseif ($this->grantType === self::GRANT_TYPE_CLIENT_CREDENTIALS) {
                 $session               = $this->oauthTokenRequest(array(
@@ -365,7 +365,7 @@ class Sample
             } elseif ($this->grantType === self::GRANT_TYPE_PASSWORD) {
                 if (!isset($this->grantInfo['username']) || !isset($this->grantInfo['password'])) {
                     // Ask the client to request end-user credentials
-                    throw new SampleAuthRequiredException();
+                    throw new Sample_Auth_Required_Exception();
                 }
                 $session               = $this->oauthTokenRequest(array(
                     'grant_type' => 'password',
@@ -679,7 +679,7 @@ class SampleAuthException extends SampleApiException
     public $error = null;
 }
 
-class SampleAuthRequiredException extends SampleAuthException
+class Sample_Auth_Required_Exception extends SampleAuthException
 {
 }
 

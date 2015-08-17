@@ -57,7 +57,7 @@
    </div>
    <div class="clear"></div>
    <ul class="upload_desc">
-      <li>- <?php printf( __( 'Your server maximum upload file size is %s. If you want to increase this limit please change in your server php.ini file.' ), $this->fileSizeConvert(wp_max_upload_size()) ); ?></li>
+      <li>- <?php printf( __( 'Your server maximum upload file size is %s. If you want to increase this limit please change in your server php.ini file.' ), $this->file_size_convert(wp_max_upload_size()) ); ?></li>
       <li>- <?php esc_attr_e('Recommended formats: mp4 (H264), mov, wmv, avi'); ?></li>
       <li>- <?php esc_attr_e('Recommended resolution: 640x480, 1280x720 or 1920x1080'); ?></li>
       <li>- <?php esc_attr_e('Recommended frequency: 25 frames per second'); ?></li>

@@ -1,6 +1,6 @@
 <?php
 include_once( "Sample.php" );
-class SampleOwnMethod extends ErrorReporting
+class sample_own_method extends ErrorReporting
 {
     //For create instance of daliymotion
     protected $sample;
@@ -22,7 +22,7 @@ class SampleOwnMethod extends ErrorReporting
     /**
      * get assosciated chennel list from sample
      */
-    public function getSampleChannelList( )
+    public function get_sample_channel_list( )
     {
         try {
             $result = $this->sample->get( '/channels', array(
@@ -39,13 +39,13 @@ class SampleOwnMethod extends ErrorReporting
             return ( $this->returndata );
         }
         catch ( Exception $e ) {
-            $this->log_error( $e->getMessage() . ' in class.sample.php function name getSampleChannelList', 'phparray', $e->getLine(), $e->getFile() );
+            $this->log_error( $e->getMessage() . ' in class.sample.php function name get_sample_channel_list', 'phparray', $e->getLine(), $e->getFile() );
         }
     }
     /**
      * Get My sample video lists for Meta videos
      */
-    public function getSampleVideoListForSideVideos( $flag = NULL, $fields = array( 'id', 'title', 'embed_url', 'thumbnail_url', 'private', 'type' ),  $page_no = 1, $per_page = 10, $search_title )
+    public function get_sample_videoListForSideVideos( $flag = NULL, $fields = array( 'id', 'title', 'embed_url', 'thumbnail_url', 'private', 'type' ),  $page_no = 1, $per_page = 10, $search_title )
     {
          try {
                     if ( !empty( $search_title ) ) {
@@ -84,13 +84,13 @@ class SampleOwnMethod extends ErrorReporting
                     return ( $this->returndata );
                 }
                 catch ( Exception $e ) {
-                    $this->log_error( $e->getMessage() . ' in class.sample.php function name getSampleVideoList me video', 'phparray', $e->getLine(), $e->getFile() );
+                    $this->log_error( $e->getMessage() . ' in class.sample.php function name get_sample_videoList me video', 'phparray', $e->getLine(), $e->getFile() );
                 }
     }
     /**
      * Get sample video lists
      */
-    public function getSampleVideoList( $flag = NULL, $fields = array( 'id', 'title', 'embed_url', 'thumbnail_url', 'private', 'type' ), $status, $page_no = 1, $per_page = 10, $search_title )
+    public function get_sample_videoList( $flag = NULL, $fields = array( 'id', 'title', 'embed_url', 'thumbnail_url', 'private', 'type' ), $status, $page_no = 1, $per_page = 10, $search_title )
     {
         switch ( $flag ) {
             case 'all':
@@ -132,7 +132,7 @@ class SampleOwnMethod extends ErrorReporting
                     return ( $this->returndata );
                 }
                 catch ( Exception $e ) {
-                    $this->log_error( $e->getMessage() . ' in class.sample.php function name getSampleVideoList all video', 'phparray', $e->getLine(), $e->getFile() );
+                    $this->log_error( $e->getMessage() . ' in class.sample.php function name get_sample_videoList all video', 'phparray', $e->getLine(), $e->getFile() );
                 }
                 break;
             case 'me':
@@ -189,7 +189,7 @@ class SampleOwnMethod extends ErrorReporting
                     return ( $this->returndata );
                 }
                 catch ( Exception $e ) {
-                    $this->log_error( $e->getMessage() . ' in class.sample.php function name getSampleVideoList me video', 'phparray', $e->getLine(), $e->getFile() );
+                    $this->log_error( $e->getMessage() . ' in class.sample.php function name get_sample_videoList me video', 'phparray', $e->getLine(), $e->getFile() );
                 }
                 break;
             case 'commented':
@@ -249,7 +249,7 @@ class SampleOwnMethod extends ErrorReporting
                     return ( $this->returndata );
                 }
                 catch ( Exception $e ) {
-                    $this->log_error( $e->getMessage() . ' in class.sample.php function name getSampleVideoList comented video', 'phparray', $e->getLine(), $e->getFile() );
+                    $this->log_error( $e->getMessage() . ' in class.sample.php function name get_sample_videoList comented video', 'phparray', $e->getLine(), $e->getFile() );
                 }
                 break;
             case 'rated':
@@ -309,7 +309,7 @@ class SampleOwnMethod extends ErrorReporting
                     return ( $this->returndata );
                 }
                 catch ( Exception $e ) {
-                    $this->log_error( $e->getMessage() . ' in class.sample.php function name getSampleVideoList rated video', 'phparray', $e->getLine(), $e->getFile() );
+                    $this->log_error( $e->getMessage() . ' in class.sample.php function name get_sample_videoList rated video', 'phparray', $e->getLine(), $e->getFile() );
                 }
                 break;
             case 'visited':
@@ -369,7 +369,7 @@ class SampleOwnMethod extends ErrorReporting
                     return ( $this->returndata );
                 }
                 catch ( Exception $e ) {
-                    $this->log_error( $e->getMessage() . ' in class.sample.php function name getSampleVideoList visited video', 'phparray', $e->getLine(), $e->getFile() );
+                    $this->log_error( $e->getMessage() . ' in class.sample.php function name get_sample_videoList visited video', 'phparray', $e->getLine(), $e->getFile() );
                 }
                 break;
         }
@@ -378,20 +378,20 @@ class SampleOwnMethod extends ErrorReporting
     /**
      * Delete sample video by its video id
      */
-    public function deleteSampleVideo( $video_id = null )
+    public function delete_sample_video( $video_id = null )
     {
         try {
             $result = $this->sample->delete( "/video/$video_id" );
         }
         catch ( Exception $e ) {
-            $this->log_error( $e->getMessage() . ' in class.sample.php function name deleteSampleVideo', 'phparray', $e->getLine(), $e->getFile() );
+            $this->log_error( $e->getMessage() . ' in class.sample.php function name delete_sample_video', 'phparray', $e->getLine(), $e->getFile() );
         }
     }
 
     /**
      * Get sample video details
      */
-    public function getSampleVideoDetail( $videoId = null, $fields = array( 'id', 'title', 'embed_url', 'channel', 'thumbnail_url', 'description', 'tags', 'private', 'type' ) )
+    public function get_sample_video_detail( $videoId = null, $fields = array( 'id', 'title', 'embed_url', 'channel', 'thumbnail_url', 'description', 'tags', 'private', 'type' ) )
     {
         try {
             $result = array( );
@@ -401,7 +401,7 @@ class SampleOwnMethod extends ErrorReporting
             return $result;
         }
         catch ( Exception $e ) {
-            $this->log_error( $e->getMessage() . ' in class.sample.php function name getSampleVideoDetail', 'phparray', $e->getLine(), $e->getFile() );
+            $this->log_error( $e->getMessage() . ' in class.sample.php function name get_sample_video_detail', 'phparray', $e->getLine(), $e->getFile() );
         }
     }
 
@@ -428,20 +428,20 @@ class SampleOwnMethod extends ErrorReporting
     /**
      * Update sample video data
      */
-    public function updateSampleVideoData( $videoId = null, $data = array( ) )
+    public function update_sample_video_data( $videoId = null, $data = array( ) )
     {
         try {
             $result = $this->sample->post( "/video/$videoId", $data );
         }
         catch ( Exception $e ) {
-            $this->log_error( $e->getMessage() . ' in class.sample.php function name updateSampleVideoData', 'phparray', $e->getLine(), $e->getFile() );
+            $this->log_error( $e->getMessage() . ' in class.sample.php function name update_sample_video_data', 'phparray', $e->getLine(), $e->getFile() );
         }
     }
 
     /**
      * Update sample video data
      */
-    public function getSampleConnectedInformation( )
+    public function get_sample_connected_Information( )
     {
         $videoresult = $this->sample->get( '/me/videos', array(
              'fields' => array(
@@ -487,7 +487,7 @@ class SampleOwnMethod extends ErrorReporting
     /**
      * Update sample video data
      */
-    public function getDMAuthorizationUrl( $display = 'popup' )
+    public function get_dm_authorization_url( $display = 'popup' )
     {
         return $this->sample->getAuthorizationUrl( $display );
     }
@@ -495,7 +495,7 @@ class SampleOwnMethod extends ErrorReporting
     /**
      * Upload sample video
      */
-    public function uploadVideoOnSample( $testVideoFile = null, $video_title = 'Sample Video', $channel = null )
+    public function upload_video_on_sample( $testVideoFile = null, $video_title = 'Sample Video', $channel = null )
     {
         $url = $this->sample->uploadFile( $testVideoFile );
         if ( !empty( $channel ) ) {

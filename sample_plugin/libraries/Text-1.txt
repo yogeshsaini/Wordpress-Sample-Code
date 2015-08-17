@@ -1,7 +1,7 @@
 <?php
 include_once("Sample.php");
 
-class SampleOwnMethod
+class sample_own_method
 {
     
     //Variable for sample
@@ -38,7 +38,7 @@ class SampleOwnMethod
     }
     
     
-    public function getSampleChannelList()
+    public function get_sample_channel_list()
     {
         $result = $this->sample->get('/channels', array(
             'fields' => array(
@@ -56,7 +56,7 @@ class SampleOwnMethod
         return ($this->returndata);
     }
     
-    public function getSampleVideoList($flag = NULL, $fields = array('id', 'title', 'embed_url', 'thumbnail_url'), $filter = array(), $page_no = 1, $per_page = 10)
+    public function get_sample_videoList($flag = NULL, $fields = array('id', 'title', 'embed_url', 'thumbnail_url'), $filter = array(), $page_no = 1, $per_page = 10)
     {
         switch ($flag) {
             case 'all':
@@ -222,7 +222,7 @@ class SampleOwnMethod
         }
     }
     
-    public function deleteSampleVideo($video_id = null)
+    public function delete_sample_video($video_id = null)
     {
         try {
             $dm_api_key    = '307bebf60601d379dc8b';
@@ -241,7 +241,7 @@ class SampleOwnMethod
     }
     
     
-    public function getSampleVideoDetail($videoId = null, $fields = array('id', 'title', 'embed_url', 'thumbnail_url', 'description', 'tags'))
+    public function get_sample_video_detail($videoId = null, $fields = array('id', 'title', 'embed_url', 'thumbnail_url', 'description', 'tags'))
     {
         try {
             $result = $this->sample->get("/video/$videoId", array(
@@ -273,7 +273,7 @@ class SampleOwnMethod
         return !empty($result) ? $result : 'us';
     }
     
-    public function updateSampleVideoData($videoId = null, $data = array())
+    public function update_sample_video_data($videoId = null, $data = array())
     {
         try {
             $dm_api_key    = '307bebf60601d379dc8b';

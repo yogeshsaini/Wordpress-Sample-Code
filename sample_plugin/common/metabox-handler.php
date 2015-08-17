@@ -12,14 +12,14 @@
             </div>
             <div id="sample_div" class="metabox-data">
                <div class="search">
-                  <input type="text" name="sample_video_title" id="sample-video-title" value="" onblur="getDMVideosByTitle('', this.value);" placeholder="Search videos on Dilymotion.com"/>
+                  <input type="text" name="sample_video_title" id="sample-video-title" value="" onblur="get_dm_videos_by_title('', this.value);" placeholder="Search videos on Dilymotion.com"/>
                </div>
                <div class="metabox-loading-image-container"><img alt="ajax-loading" class="ajax-loading-img" src="<?=SAMPLE_URL;?>/img/495.GIF" /></div>
                <div id="sample_div_callback" class="metabox-video-list"></div>
             </div>
             <div id="my_video_div" class="metabox-data">
                <div class="select-group">
-                  <select name="video-group" id="video_group" onchange="getVideosByGroup(this.value)">
+                  <select name="video-group" id="video_group" onchange="get_videos_by_group(this.value)">
                      <option value="dm_cloud">Sample Cloud</option>
                      <option value="dm">Sample.com</option>
                   </select>

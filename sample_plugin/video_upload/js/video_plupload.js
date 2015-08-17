@@ -145,7 +145,7 @@ function plu_show_thumbs(video_id) {
                 if(ki == 'cloud') {
                     editDMCvideo(mediaid);
                 } else if (ki == 'sample') {
-                    editSamplevideo(mediaid);
+                    edit_sample_video(mediaid);
                 }
                 return false;
             });

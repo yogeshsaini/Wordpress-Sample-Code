@@ -1,16 +1,15 @@
-<?php
-global $dm_session_store;
-$credents = $dm_session_store;
-$selected = isset($_REQUEST['filter']) && !empty($_REQUEST['filter']) ? $_REQUEST['filter'] : 'me';
-$video_status = (isset($_REQUEST['status']) || !empty($_REQUEST['status'])) ? $_REQUEST['status'] : 'all';
-$search_title = (isset($_REQUEST['dm_video_title']) && !empty($_REQUEST['dm_video_title']))?$_REQUEST['dm_video_title'] : '';
-@session_start();
-if(isset($_SESSION['dm_success']))
-{
-   $message = '<div class="dm-success-message"><span></span>'.$_SESSION['dm_success'].'</div>';
-   unset($_SESSION['dm_success']);
-}
-?>
+ <?php
+   global $dm_session_store;
+   $credents     = $dm_session_store;
+   $selected     = isset( $_REQUEST['filter'] ) && !empty( $_REQUEST['filter'] ) ? $_REQUEST['filter'] : 'me';
+   $video_status = ( isset( $_REQUEST['status'] ) || !empty( $_REQUEST['status'] ) ) ? $_REQUEST['status'] : 'all';
+   $search_title = ( isset( $_REQUEST['dm_video_title'] ) && !empty( $_REQUEST['dm_video_title'] ) ) ? $_REQUEST['dm_video_title'] : '';
+   @session_start();
+   if ( isset( $_SESSION['dm_success'] ) ) {
+                   $message = '<div class="dm-success-message"><span></span>' . $_SESSION['dm_success'] . '</div>';
+                   unset( $_SESSION['dm_success'] );
+   }
+?> 
 <div class="main-gallery-container dm-common">
    <?php if(isset($message)):echo $message;endif;?>
    <div id="header-container" class="wrap">
@@ -30,10 +29,10 @@ if(isset($_SESSION['dm_success']))
       <div class="wrap">
          <?php
          if (isset($credents) && !empty($credents)) {
-            $dmVideos = $this->getSampleVideos($selected, $search_title, $video_status);
+            $dmVideos = $this->get_sample_videos($selected, $search_title, $video_status);
             //echo "<pre>"; print_r($dmVideos);
             //if (count($dmVideos) == 0) {
-            //   $dmVideos = $this->getSampleVideos('all', $search_title, $video_status);
+            //   $dmVideos = $this->get_sample_videos('all', $search_title, $video_status);
             //}
 
          ?>
@@ -141,7 +140,7 @@ if(isset($_SESSION['dm_success']))
                            <span class="video-status"><?php print $status; ?></span>
                         </div>
                      <div class="hide-option">
-                         <a class="edit-trigger" onclick="editSamplevideo('<?php print $video['id'] ;?>');" href="javascript:void(0);">Edit</a>
+                         <a class="edit-trigger" onclick="edit_sample_video('<?php print $video['id'] ;?>');" href="javascript:void(0);">Edit</a>
                          <a class="trash-trigger" href="javascript:void(0);">Trash</a>
                              <div class="confirm-box">
                                  <div class="head"><span class="arrow"></span>Delete this video?</div>

@@ -1,15 +1,14 @@
-<?php
-global $user_meta;
-$credents = $user_meta;
-$selected = isset($_GET['filter']) && !empty($_GET['filter']) ? $_GET['filter'] : '-created';
-$search_title = (isset($_REQUEST['dmc_video_title']) && !empty($_REQUEST['dmc_video_title']))?$_REQUEST['dmc_video_title']:'';
-@session_start();
-if(isset($_SESSION['dmc_success']))
-{
-   $message = '<div class="dm-success-message"><span></span>'.$_SESSION['dmc_success'].'</div>';
-   unset($_SESSION['dmc_success']);
-}
-?>
+ <?php
+   global $user_meta;
+   $credents     = $user_meta;
+   $selected     = isset( $_GET['filter'] ) && !empty( $_GET['filter'] ) ? $_GET['filter'] : '-created';
+   $search_title = ( isset( $_REQUEST['dmc_video_title'] ) && !empty( $_REQUEST['dmc_video_title'] ) ) ? $_REQUEST['dmc_video_title'] : '';
+   @session_start();
+   if ( isset( $_SESSION['dmc_success'] ) ) {
+				   $message = '<div class="dm-success-message"><span></span>' . $_SESSION['dmc_success'] . '</div>';
+				   unset( $_SESSION['dmc_success'] );
+   }
+?> 
 <div class="main-gallery-container dm-common">
     <?php if(isset($message)):echo $message;endif;?>
    <div id="header-container" class="wrap">
@@ -29,8 +28,8 @@ if(isset($_SESSION['dmc_success']))
       <div class="wrap">
          <?php
 
-            if (isset($credents) && !empty($credents)) {
-               $dmcVideos = $this->getSampleCloudVideos($search_title, $selected);
+            if (	isset($credents) && !empty($credents)	) {
+               $dmcVideos = $this->get_sample_cloud_videos($search_title, $selected);
                if (count($dmcVideos) > 0 || $search_title != '') {
                ?>
              <div id="sample-cloud">
@@ -57,7 +56,7 @@ if(isset($_SESSION['dmc_success']))
                   </div>
                </form>
                <?php
-               if ($search_title != '') {
+               if (	$search_title != ''	) {
                      if (isset($dmcVideos['total_record'])) {
                            $found = $dmcVideos['total_record'];
                         } else {
@@ -69,7 +68,7 @@ if(isset($_SESSION['dmc_success']))
             </div>
             <div id="samplecloud-display-section">
                <?php
-               if (isset($dmcVideos['total_pages']) && count($dmcVideos['total_pages']) > 0) {
+               if (	isset($dmcVideos['total_pages']) && count($dmcVideos['total_pages']) > 0	) {
                      $nr = $dmcVideos['total_pages'];
                      $page_links = paginate_links( array(
                                  'base' => add_query_arg( 'pagenum', '%#%' ),
@@ -80,7 +79,7 @@ if(isset($_SESSION['dmc_success']))
                                  'current' => !empty($_GET['pagenum']) ? $_GET['pagenum'] : 1
                                  ) );
 
-                     if ($page_links):
+                     if (	$page_links	):
                         echo '<div class="dsl-pager"><span class="total-records italic">'.$dmcVideos['total_record'].' items</span><span class="paging-display">'. $page_links . '</span></div>';
                      endif;
                ?>
@@ -109,7 +108,7 @@ if(isset($_SESSION['dmc_success']))
                                         </div>
                                 <a class="view-trigger" href="javascript:void(0);">view</a>
                             </div></td>
-			    <td class="created"><?php print $video['created'];?><div class="dmc-keywords"><?php print $this->getDMCKeywords($video['media_id']);?></div></td>
+			    <td class="created"><?php print $video['created'];?><div class="dmc-keywords"><?php print $this->get_dmc_keywords($video['media_id']);?></div></td>
 			 </tr>
                   <?php } ?>
                </table>
@@ -130,13 +129,13 @@ if(isset($_SESSION['dmc_success']))
                <div id="dm-cloud-edit-form" class="dm-cloud-edit-form dm_cloud_second"></div>
             </div>
          </div>
-         <?php   }else if($search_title == '') { ?>
+         <?php   } else if (	$search_title == ''	) { ?>
             <div class = "no-result-container">
                <div class="icon"></div>
                <div class="message"><p>You haven't uploaded any videos yet.</p><p>Start uploading your videos now!</p></div>
                <div class="page-link"><a href="#">Upload Videos</a></div>
                </div>
-           <?php } }else { ?>
+           <?php } }	else 	{ ?>
             <div class="dmc-not-auth">
                <div class="icon"></div>
                <div class="msg"><p>You are not connected to an account on Sample cloud.</p><p>In order to see your videos here, go to the plug-in setting to connect your Sample Cloud account.</p></div>

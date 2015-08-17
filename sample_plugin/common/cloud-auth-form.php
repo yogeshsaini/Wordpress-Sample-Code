@@ -1,16 +1,16 @@
 <div id="header-container" class="wrap">
    <h2><?php _e('Settings', 'sample'); ?></h2>
-   <?php if(!empty($options3) || !empty($options1)) : ?>
-   <p><?php  _e('Congrats, you\'re now connected!', 'sample'); ?><br/>
-      <?php  _e('You can start managing your videos using the Sample menus to the left.', 'sample'); ?>
+   <?php if (   !empty($options3) || !empty($options1) ) : ?>
+   <p><?php  _e(  'Congrats, you\'re now connected!', 'sample' ); ?><br/>
+      <?php  _e(  'You can start managing your videos using the Sample menus to the left.', 'sample'  ); ?>
    </p>
    <?php else : ?>
-   <p><?php  _e('Insert your video into your post while you writing.', 'sample'); ?><br/>
-      <?php  _e('Connect Your Sample account(s) below.', 'sample'); ?>
+   <p><?php  _e(  'Insert your video into your post while you writing.', 'sample'   ); ?><br/>
+      <?php  _e(  'Connect Your Sample account(s) below.', 'sample'  ); ?>
    </p>
    <?php endif; ?>
    <div class="box_wrapper">
-      <?php if(isset($sampleData) && !empty($sampleData) && is_array($sampleData)) : ?>
+      <?php if (  isset(   $sampleData ) && !empty(   $sampleData ) && is_array( $sampleData )  ) : ?>
       <div id="sample_box">
          <div class="align_center">
             <div class="header_logo first"><img src="<?php print SAMPLE_URL; ?>/img/dm_head.jpg" alt="" /></div>
@@ -99,7 +99,7 @@
          </div>
       </div>
       <?php endif; ?>
-      <?php if(isset($options1) && !empty($options1)) : ?>
+      <?php if (   isset($options1) && !empty($options1)  ) : ?>
       <div id="sample_box" class="dmc-box">
          <div class="align_center">
             <div class="header_logo"><img src="<?php print SAMPLE_URL; ?>/img/dm_cloud.jpg" alt="" /></div>
@@ -108,7 +108,7 @@
                <div class="connected"><?php _e('Your Sample Cloud account is connected', 'sample'); ?></div>
             </div>
             <div id="sample_box_conected" class="conected_second">
-               <?php $data = $this->showCloudaccountData(); ?>
+               <?php $data = $this->show_cloud_account_data(); ?>
                <div class="account_name"><?php print $data['udata']; ?></div>
                <div class="disconnect_wrapper">
                   <a class="disconnect_account" rel="cloud" href="#"><?php _e('Disconnect', 'sample'); ?></a>
@@ -135,7 +135,7 @@
       </div>
       <?php endif; ?>
    </div>
-   <?php if(empty($options1)) : ?>
+   <?php if (   empty(  $options1   )  ) : ?>
    <?php //settings_errors(); ?>
    <div style="display: none">
       <div id="cloud_form_popup" style="float:left;">
