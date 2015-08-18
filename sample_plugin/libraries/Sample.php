@@ -228,7 +228,7 @@ class Sample
     {
 
         $headers = array(
-            'Content-Type: application/json'
+            'Content-Type: application/assets/json'
         );
         $payload = json_encode(array(
             'call' => $method,
@@ -451,7 +451,7 @@ class Sample
         $new_value   = $session;
         if(!empty($new_value)) {
             if (!empty($dm_session_meta)) {
-                update_user_meta($current_user->ID, 'sample_session_store', $new_value);
+                sp_update_user_meta($current_user->ID, 'sample_session_store', $new_value);
             } else {
                 add_user_meta($current_user->ID, 'sample_session_store', $new_value);
             }
@@ -461,7 +461,7 @@ class Sample
         //$option_name = 'sample_session_store';
         //if(!empty($new_value)) {
         //    if (get_option($option_name) !== false) {
-        //        update_option($option_name, $new_value);
+        //        sp_update_option($option_name, $new_value);
         //    } else {
         //        add_option($option_name, $new_value);
         //    }

@@ -391,11 +391,11 @@ class sample_own_method extends ErrorReporting
     /**
      * Get sample video details
      */
-    public function get_sample_video_detail( $videoId = null, $fields = array( 'id', 'title', 'embed_url', 'channel', 'thumbnail_url', 'description', 'tags', 'private', 'type' ) )
+    public function get_sample_video_detail( $video_id = null, $fields = array( 'id', 'title', 'embed_url', 'channel', 'thumbnail_url', 'description', 'tags', 'private', 'type' ) )
     {
         try {
             $result = array( );
-            $result = $this->sample->get( "/video/$videoId", array(
+            $result = $this->sample->get( "/video/$video_id", array(
                  'fields' => $fields
             ) );
             return $result;
@@ -418,7 +418,7 @@ class sample_own_method extends ErrorReporting
         } else {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
-        $ip_data = @json_decode( file_get_contents( "http://www.geoplugin.net/json.gp?ip=" . $ip ) );
+        $ip_data = @json_decode( file_get_contents( "http://www.geoplugin.net/assets/json.gp?ip=" . $ip ) );
         if ( $ip_data && $ip_data->geoplugin_countryCode != null ) {
             $result = $ip_data->geoplugin_countryCode;
         }
@@ -428,13 +428,13 @@ class sample_own_method extends ErrorReporting
     /**
      * Update sample video data
      */
-    public function update_sample_video_data( $videoId = null, $data = array( ) )
+    public function sp_update_sample_video_data( $video_id = null, $data = array( ) )
     {
         try {
-            $result = $this->sample->post( "/video/$videoId", $data );
+            $result = $this->sample->post( "/video/$video_id", $data );
         }
         catch ( Exception $e ) {
-            $this->log_error( $e->getMessage() . ' in class.sample.php function name update_sample_video_data', 'phparray', $e->getLine(), $e->getFile() );
+            $this->log_error( $e->getMessage() . ' in class.sample.php function name sp_update_sample_video_data', 'phparray', $e->getLine(), $e->getFile() );
         }
     }
 

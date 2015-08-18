@@ -19,8 +19,8 @@
       </div>
       <div id="tabs-navigation">
          <ul>
-            <li><a href="<?php echo SAMPLE_ADMIN_URL; ?>admin.php?page=dm-video-gallery" class="active-select"><img src="<?php echo SAMPLE_URL; ?>/img/daily_tab_head.png" alt="Sample" /></a></li>
-            <li><a href="<?php echo SAMPLE_ADMIN_URL; ?>admin.php?page=video-gallery-page"><img src="<?php echo SAMPLE_URL; ?>/img/dynaamo_tab_head.png" alt="Sample Cloud" /></a></li>
+            <li><a href="<?php echo SAMPLE_ADMIN_URL; ?>admin.php?page=dm-video-gallery" class="active-select"><img src="<?php echo SAMPLE_URL; ?>/assets/img/daily_tab_head.png" alt="Sample" /></a></li>
+            <li><a href="<?php echo SAMPLE_ADMIN_URL; ?>admin.php?page=video-gallery-page"><img src="<?php echo SAMPLE_URL; ?>/assets/img/dynaamo_tab_head.png" alt="Sample Cloud" /></a></li>
 
          </ul>
       </div>
@@ -29,17 +29,17 @@
       <div class="wrap">
          <?php
          if (isset($credents) && !empty($credents)) {
-            $dmVideos = $this->get_sample_videos($selected, $search_title, $video_status);
+            $dmVideos = $this->sp_get_sample_videos($selected, $search_title, $video_status);
             //echo "<pre>"; print_r($dmVideos);
             //if (count($dmVideos) == 0) {
-            //   $dmVideos = $this->get_sample_videos('all', $search_title, $video_status);
+            //   $dmVideos = $this->sp_get_sample_videos('all', $search_title, $video_status);
             //}
 
          ?>
          <div id="sample-cloud">
             <div class="search-form">
                <div class="overlay"></div>
-               <div class="loading-image-container"><img alt="ajax-loading" class="ajax-loading-img" src="<?php echo SAMPLE_URL; ?>/img/495.GIF" /></div>
+               <div class="loading-image-container"><img alt="ajax-loading" class="ajax-loading-img" src="<?php echo SAMPLE_URL; ?>/assets/img/495.GIF" /></div>
                <form method="get" action="">
                   <input type="hidden" value="<?=$_REQUEST['page'];?>" name="page">
                   <input id="dm-video-title" type="text" name="dm_video_title" value="<?php if(isset($_REQUEST['dm_video_title'])) {print $_REQUEST['dm_video_title'];}?>" placeholder="Search my videos"/>
@@ -110,7 +110,7 @@
                <table class = "video-gallery-container" cellpadding = "0" cellspacing = "0">
                   <?php
                         foreach ($dmVideos['videos'] as $video) {
-                        $mediaImageURL = ($video['thumbnail_url']) ? $video['thumbnail_url'] : SAMPLE_URL . '/img/no_files_found.jpg';
+                        $media_image_url = ($video['thumbnail_url']) ? $video['thumbnail_url'] : SAMPLE_URL . '/assets/img/no_files_found.jpg';
                         if (strlen($video['title']) > 167) {
                            $title = substr($video['title'], 0, 167) . '...';
                         } else {
@@ -126,7 +126,7 @@
                         $overlayClasspu = (isset($publish) && $publish == 'unpublished')?'<div class="private-container"><div class="unpublishedOverlay"></div></div>':'';
                   ?>
                   <tr class="dm-gallery-rows">
-                     <td class="image"><?php print $overlayClasspp; ?> <?php print $overlayClasspu; ?><img title="<?php print $video['title'];?>" alt="<?php print $video['embed_url'] ;?>" class="video-thumbnail" src="<?php print $mediaImageURL ;?>" alt="" /><span class="dm-play-time"><?php print $video['duration'];?></span></td>
+                     <td class="image"><?php print $overlayClasspp; ?> <?php print $overlayClasspu; ?><img title="<?php print $video['title'];?>" alt="<?php print $video['embed_url'] ;?>" class="video-thumbnail" src="<?php print $media_image_url ;?>" alt="" /><span class="dm-play-time"><?php print $video['duration'];?></span></td>
                      <td class="Vtitle">
                         <div class="dm-title"><?php print $title;?></div>
                         <div class="private-status"><?php if ($status == 'Private'):print '- '.$status;endif;?></div>
@@ -135,7 +135,7 @@
                            <span class="tags"><?php print $channel;?></span>
                            <span class="views italic"><?php print $video['views_total'];?> views</span>
                            <?php if ($publish == 'unpublished'):?>
-                              <span class="unpublished-tooltip italic">, unpublished <span class="qus_mark tooltip"><span><img class="callout" src="<?php print SAMPLE_URL; ?>/img/tool-tip-arrow.png" />A video can only be published when it has both a title and a channel assigned to it.</span></span></span>
+                              <span class="unpublished-tooltip italic">, unpublished <span class="qus_mark tooltip"><span><img class="callout" src="<?php print SAMPLE_URL; ?>/assets/img/tool-tip-arrow.png" />A video can only be published when it has both a title and a channel assigned to it.</span></span></span>
                            <?php endif; ?>
                            <span class="video-status"><?php print $status; ?></span>
                         </div>

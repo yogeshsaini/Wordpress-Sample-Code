@@ -19,11 +19,11 @@ class Sample_Video_Gallery_Page
                                 $this->dcpass  = $dcpass;
                                 add_action( 'wp_ajax_change_gallery_records', array(
                                                  $this,
-                                                'get_sample_videos' 
+                                                'sp_get_sample_videos' 
                                 ) );
                                 add_action( 'admin_menu', array(
                                                  $this,
-                                                'sample_video_gallery_page_handler' 
+                                                'sp_sample_sp_video_gallery_page_handler' 
                                 ) );
                                 //add_action('admin_menu', array(
                                 //    $this,
@@ -31,47 +31,47 @@ class Sample_Video_Gallery_Page
                                 //));
                                 add_action( 'admin_menu', array(
                                                  $this,
-                                                'sample_search_result_page' 
+                                                'sp_sample_search_result_page' 
                                 ) );
                                 add_action( 'wp_ajax_delete_dm_video', array(
                                                  $this,
-                                                'delete_sample_video_callback' 
+                                                'sp_delete_sample_video_callback' 
                                 ) );
-                                add_action( 'wp_ajax_edit_sample_records', array(
+                                add_action( 'wp_ajax_sp_edit_sample_records', array(
                                                  $this,
-                                                'edit_sample_records' 
+                                                'sp_edit_sample_records' 
                                 ) );
-                                add_action( 'wp_ajax_update_sample_datas', array(
+                                add_action( 'wp_ajax_sp_update_sample_datas', array(
                                                  $this,
-                                                'update_sample_records' 
+                                                'sp_update_sample_records' 
                                 ) );
                 }
                 /**
                  * Callback method for Sample video gallery page handler.
                  */
-                public function sample_video_gallery_page_handler( )
+                public function sp_sample_sp_video_gallery_page_handler( )
                 {
                                 add_submenu_page( 'dm-admin-setting', 'Sample video gallery', 'Sample video gallery', 'read', 'dm-video-gallery', array(
                                                  $this,
-                                                'sampleVideoGalleryPageCallback' 
+                                                'sp_sample_sp_video_gallery_page_callback' 
                                 ) );
                 }
                 
                 /**
                  * Callback Method for Sample video detail page menu
                  */
-                public function sample_search_result_page( )
+                public function sp_sample_search_result_page( )
                 {
                                 add_submenu_page( null, 'Sample search result', 'Sample search result', 'administrator', 'dm-search-result', array(
                                                  $this,
-                                                'sample_search_result_pageCallback' 
+                                                'sp_sample_search_result_pageCallback' 
                                 ) );
                 }
                 
                 /**
                  * Callback Method for Sample Search
                  */
-                public function sample_search_result_pageCallback( )
+                public function sp_sample_search_result_pageCallback( )
                 {
                                 if ( isset( $_POST['sample_video_title'] ) ) {
                                                 require_once SAMPLE_DIR . '/dm/dm-search-result.php';
@@ -82,7 +82,7 @@ class Sample_Video_Gallery_Page
                 /**
                  * Callback method for Daily motion video gallery page
                  */
-                public function sampleVideoGalleryPageCallback( )
+                public function sp_sample_sp_video_gallery_page_callback( )
                 {
                                 require_once SAMPLE_DIR . '/dm/dm-video-gallery-html.php';
                 }
@@ -90,11 +90,11 @@ class Sample_Video_Gallery_Page
                 /**
                  * Method to display Sample vodeo gallery
                  */
-                public function get_sample_videos( $selected = 'me', $search_title, $status = 'all' )
+                public function sp_get_sample_videos( $selected = 'me', $search_title, $status = 'all' )
                 {
                                 $sample       = new sample_own_method();
                                 $pn           = ( isset( $_GET['pageno'] ) ) ? preg_replace( '#[^0-9]#i', '', $_GET['pageno'] ) : 1;
-                                $itemsPerPage = (int) self::ITEMS_PER_PAGE;
+                                $items_per_page = (int) self::ITEMS_PER_PAGE;
                                 $dmvideos     = $sample->get_sample_videoList( $selected, $fields = array(
                                                  'id',
                                                 'title',
@@ -108,14 +108,14 @@ class Sample_Video_Gallery_Page
                                                 'duration',
                                                 'private',
                                                 'published' 
-                                ), $status, (int) $pn, $itemsPerPage, $search_title );
+                                ), $status, (int) $pn, $items_per_page, $search_title );
                                 return $dmvideos;
                 }
                 
                 /**
                  * Method to display My Sample video Preview
                  */
-                public function play_my_dm_video_iframe( $title = null, $embed_url = null )
+                public function sp_play_my_dm_video_iframe( $title = null, $embed_url = null )
                 {
                                 if ( !empty( $title ) && !empty( $embed_url ) ) {
                                                 $str = '';
@@ -134,7 +134,7 @@ class Sample_Video_Gallery_Page
                 /**
                  * Method to delete sample video
                  */
-                public function delete_sample_video_callback( )
+                public function sp_delete_sample_video_callback( )
                 {
                                 $Id     = ( isset( $_POST['Id'] ) ) ? $_POST['Id'] : null;
                                 $sample = new sample_own_method();
@@ -148,23 +148,23 @@ class Sample_Video_Gallery_Page
                 /**
                  * Method to edit Sample video by media Id
                  */
-                public function edit_sample_records( )
+                public function sp_edit_sample_records( )
                 {
                                 $media_id = ( $_POST['mediaId'] ) ? $_POST['mediaId'] : null;
                                 if ( !empty( $media_id ) ) {
                                                 $sample        = new sample_own_method();
-                                                $videoInfo     = $sample->get_sample_video_detail( $media_id );
+                                                $video_info     = $sample->get_sample_video_detail( $media_id );
                                                 $chennelslist  = $sample->get_sample_channel_list();
-                                                $mediaImageURL = !empty( $videoInfo['thumbnail_url'] ) ? $videoInfo['thumbnail_url'] : SAMPLE_URL . '/img/no_files_found.jpg';
-                                                $description   = !empty( $videoInfo['description'] ) ? $videoInfo['description'] : '';
-                                                $tags          = !empty( $videoInfo['tags'] ) ? implode( ', ', $videoInfo['tags'] ) : '';
-                                                $Channels      = !empty( $videoInfo['channel'] ) ? $videoInfo['channel'] : '';
+                                                $media_image_url = !empty( $video_info['thumbnail_url'] ) ? $video_info['thumbnail_url'] : SAMPLE_URL . '/assets/img/no_files_found.jpg';
+                                                $description   = !empty( $video_info['description'] ) ? $video_info['description'] : '';
+                                                $tags          = !empty( $video_info['tags'] ) ? implode( ', ', $video_info['tags'] ) : '';
+                                                $Channels      = !empty( $video_info['channel'] ) ? $video_info['channel'] : '';
                                                 $curpage       = !empty( $_POST['curpage'] ) ? $_POST['curpage'] : 'notfound';
                                                 $str           = '';
-                                                $str .= '<script type="text/javascript" src="' . SAMPLE_URL . '/js/ajax-upload_pattern.js"></script>';
+                                                $str .= '<script type="text/javascript" src="' . SAMPLE_URL . '/assets/js/ajax-upload_pattern.js"></script>';
                                                 $str .= '<div class="dmc-edit-container dm-common">';
-                                                $str .= '<form enctype="multipart/form-data" action="" id="dm_update_form" method="post">';
-                                                $str .= '<input type="hidden" name="id" size="50" value="' . $videoInfo['id'] . '" />';
+                                                $str .= '<form enctype="multipart/form-data" action="" id="dm_sp_update_form" method="post">';
+                                                $str .= '<input type="hidden" name="id" size="50" value="' . $video_info['id'] . '" />';
                                                 $str .= '<input type="hidden" id="curpage" name="curpage" value="' . $curpage . '" />';
                                                 $str .= '<input type="hidden" id="status_publish" name="data[published]" value="true" />';
                                                 $str .= '<div class="logo">
@@ -173,14 +173,14 @@ class Sample_Video_Gallery_Page
                     </div>';
                                                 $str .= '<div class="title-wrap">
                         <label><span class="required">*</span>Video Title:</label>
-                        <input type="text" name="data[title]" id="video-title" value="' . $videoInfo['title'] . '" />
+                        <input type="text" name="data[title]" id="video-title" value="' . $video_info['title'] . '" />
                     </div>';
                                                 $str .= '<div class="desc-wrap">
                         <label>Video Description:</label>
                         <textarea  name="data[description]" id="video-title">' . $description . '</textarea>
                      </div>';
                                                 $str .= '<div class="channel-wrap">
-                     <label><span class="required">*</span>Channel: <span class="qus_mark tooltip"><span><img class="callout" src="' . SAMPLE_URL . '/img/callout.gif" />Sample Publisher allows you to earn advertising revenue when sharing Sample videos on your site.</span></span></label>
+                     <label><span class="required">*</span>Channel: <span class="qus_mark tooltip"><span><img class="callout" src="' . SAMPLE_URL . '/assets/img/callout.gif" />Sample Publisher allows you to earn advertising revenue when sharing Sample videos on your site.</span></span></label>
                      <select type="text" id="channel" name="data[channel]">';
                                                 $str .= '<option value="">Please select</option>';
                                                 if ( isset( $chennelslist ) && !empty( $chennelslist ) ) {
@@ -191,7 +191,7 @@ class Sample_Video_Gallery_Page
                                                 }
                                                 $str .= '</select></div>';
                                                 $change = '';
-                                                if ( isset( $videoInfo['type'] ) && $videoInfo['type'] == 'official' ):
+                                                if ( isset( $video_info['type'] ) && $video_info['type'] == 'official' ):
                                                                 $change = '<a id="browse_file" href="#">Change Thumbnail</a>
                      <input type="hidden" id="attach_id" name="at_id" value="" />
                      <input type="hidden" id="attach_url" name="data[thumbnail_url]" value="" />';
@@ -199,7 +199,7 @@ class Sample_Video_Gallery_Page
                                                 $str .= '<div class="thumb-wrap">
                      <label>Thumbnail:</label>
                      <div class="video-thumb">
-                        <img class="edit-video-thumbnail" src="' . $mediaImageURL . '" alt="" width="150" height="150"/>
+                        <img class="edit-video-thumbnail" src="' . $media_image_url . '" alt="" width="150" height="150"/>
                      </div>
                      <div class="thumb-right">
                         ' . $change . '
@@ -213,11 +213,11 @@ class Sample_Video_Gallery_Page
                         <label>Tag(s):</label>
                         <input type="text" class="tags" name="data[tags]" maxlength="250" size="50" id="video-tags" value="' . $tags . '" />
                     </div>';
-                                                $checked_private = ( isset( $videoInfo['private'] ) && $videoInfo['private'] == 1 ) ? 'checked="checked"' : '';
-                                                $checked_public  = ( isset( $videoInfo['private'] ) && $videoInfo['private'] == 1 ) ? '' : 'checked="checked"';
+                                                $checked_private = ( isset( $video_info['private'] ) && $video_info['private'] == 1 ) ? 'checked="checked"' : '';
+                                                $checked_public  = ( isset( $video_info['private'] ) && $video_info['private'] == 1 ) ? '' : 'checked="checked"';
                                                 
-                                                $class_private = ( isset( $videoInfo['private'] ) && $videoInfo['private'] == 1 ) ? 'blur' : '';
-                                                $class_public  = ( isset( $videoInfo['private'] ) && $videoInfo['private'] == 1 ) ? '' : 'blur';
+                                                $class_private = ( isset( $video_info['private'] ) && $video_info['private'] == 1 ) ? 'blur' : '';
+                                                $class_public  = ( isset( $video_info['private'] ) && $video_info['private'] == 1 ) ? '' : 'blur';
                                                 
                                                 $str .= '<div class="visibility-wrap visibility_private ' . $class_public . '">
                         <label>Visibility:</label>
@@ -246,7 +246,7 @@ class Sample_Video_Gallery_Page
                                    </div>
                                 </div>
                                 <div class="save">
-                                   <a class="save_new_data" onclick="return getSampleupdatedvalues();" href="javascript:void(0);">Save</a>
+                                   <a class="save_new_data" onclick="return getSamplesp_updatedvalues();" href="javascript:void(0);">Save</a>
                                 </div>
                              </div>
                        </div>';
@@ -258,19 +258,19 @@ class Sample_Video_Gallery_Page
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
-                public function update_sample_records( )
+                public function sp_update_sample_records( )
                 {
                                 if ( isset( $_POST['id'] ) && !empty( $_POST['id'] ) && is_array( $_POST['data'] ) ) {
                                                 $sample    = new sample_own_method();
-                                                $videoInfo = $sample->update_sample_video_data( $_POST['id'], array_filter( $_POST['data'] ) );
+                                                $video_info = $sample->sp_update_sample_video_data( $_POST['id'], array_filter( $_POST['data'] ) );
                                                 session_start();
                                                 if ( !isset( $_SESSION['dm_success'] ) || $_SESSION['dm_success'] == "" ) {
                                                                 $_SESSION['dm_success'] = 'Your video was saved successfully.';
                                                 }
                                                 print json_encode( array(
-                                                                 'msg' => 'Successfully updated' 
+                                                                 'msg' => 'Successfully sp_updated' 
                                                 ) );
                                                 exit;
                                 }

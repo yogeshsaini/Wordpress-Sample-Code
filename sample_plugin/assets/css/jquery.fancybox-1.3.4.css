@@ -35,7 +35,7 @@
 	left: 0;
 	width: 40px;
 	height: 480px;
-	background-image: url('../img/fancybox.png');
+	background-image: url('../assets/img/fancybox.png');
 }
 
 #fancybox-overlay {
@@ -65,9 +65,9 @@
 	display: none;
 }
 /* Css by anurag */
-/*#browse_file{top: -133px; left: 6px; text-indent: -9999px; display: inline-block; background:url(../img/red_edit.png) no-repeat; width:18px; height:18px}*/
+/*#browse_file{top: -133px; left: 6px; text-indent: -9999px; display: inline-block; background:url(../assets/img/red_edit.png) no-repeat; width:18px; height:18px}*/
 /*#submitPattern{text-indent: -9999px; display: inline-block;}*/
-#dm_update_form input {/*width:50%; border:3px solid #000; border-radius:15px;*/}
+#dm_sp_update_form input {/*width:50%; border:3px solid #000; border-radius:15px;*/}
 .dm-cloud-edit-form{padding-left:45px; overflow:hidden; }
 .dm-cloud-edit-form a{text-decoration:none !important}
 table th{font-weight:bold !important}
@@ -78,8 +78,8 @@ table th{font-weight:bold !important}
 .dm-cloud-edit-form p a:nth-of-type(2) {background:#fafafa; color:#1e8cbe; margin-left:10px;}
 .dm-cloud-edit-form p a:hover {opacity:1;}
 #TextBoxesGroup tr th {text-align:right;}
-.dm-cloud-edit-form form table tr th a {float:left; background: url('../img/plus.png') no-repeat 172px 2px; padding-right:50px;}
-.dm-cloud-edit-form form table tr td a.delete-tag {padding-left:25px; width:15px; height:15px; background:url('../img/redCross.png') no-repeat; position:relative; left:22px; top:3px;}
+.dm-cloud-edit-form form table tr th a {float:left; background: url('../assets/img/plus.png') no-repeat 172px 2px; padding-right:50px;}
+.dm-cloud-edit-form form table tr td a.delete-tag {padding-left:25px; width:15px; height:15px; background:url('../assets/img/redCross.png') no-repeat; position:relative; left:22px; top:3px;}
 #message{display:none;background-color: #FFFFE0; border-color: #E6DB55; margin: 5px 0 15px;  padding: 6px; font-weight:bold}
 
 
@@ -119,7 +119,7 @@ table th{font-weight:bold !important}
 	right: -15px;
 	width: 30px;
 	height: 30px;
-	background: transparent url('../img/fancybox.png') -40px 0px;
+	background: transparent url('../assets/img/fancybox.png') -40px 0px;
 	cursor: pointer;
 	z-index: 1103;
 	display: none;
@@ -157,7 +157,7 @@ table th{font-weight:bold !important}
 	width: 35%;
 	cursor: pointer;
 	outline: none;
-	background: transparent url('../img/blank.gif');
+	background: transparent url('../assets/img/blank.gif');
 	z-index: 1102;
 	display: none;
 }
@@ -183,12 +183,12 @@ table th{font-weight:bold !important}
 }
 
 #fancybox-left-ico {
-	background-image: url('../img/fancybox.png');
+	background-image: url('../assets/img/fancybox.png');
 	background-position: -40px -30px;
 }
 
 #fancybox-right-ico {
-	background-image: url('../img/fancybox.png');
+	background-image: url('../assets/img/fancybox.png');
 	background-position: -40px -60px;
 }
 
@@ -219,13 +219,13 @@ table th{font-weight:bold !important}
 	top: -20px;
 	left: 0;
 	width: 100%;
-	background-image: url('../img/fancybox-x.png');
+	background-image: url('../assets/img/fancybox-x.png');
 }
 
 #fancybox-bg-ne {
 	top: -20px;
 	right: -20px;
-	background-image: url('../img/fancybox.png');
+	background-image: url('../assets/img/fancybox.png');
 	background-position: -40px -162px;
 }
 
@@ -233,14 +233,14 @@ table th{font-weight:bold !important}
 	top: 0;
 	right: -20px;
 	height: 100%;
-	background-image: url('../img/fancybox-y.png');
+	background-image: url('../assets/img/fancybox-y.png');
 	background-position: -20px 0px;
 }
 
 #fancybox-bg-se {
 	bottom: -20px;
 	right: -20px;
-	background-image: url('../img/fancybox.png');
+	background-image: url('../assets/img/fancybox.png');
 	background-position: -40px -182px; 
 }
 
@@ -248,14 +248,14 @@ table th{font-weight:bold !important}
 	bottom: -20px;
 	left: 0;
 	width: 100%;
-	background-image: url('../img/fancybox-x.png');
+	background-image: url('../assets/img/fancybox-x.png');
 	background-position: 0px -20px;
 }
 
 #fancybox-bg-sw {
 	bottom: -20px;
 	left: -20px;
-	background-image: url('../img/fancybox.png');
+	background-image: url('../assets/img/fancybox.png');
 	background-position: -40px -142px;
 }
 
@@ -263,13 +263,13 @@ table th{font-weight:bold !important}
 	top: 0;
 	left: -20px;
 	height: 100%;
-	background-image: url('../img/fancybox-y.png');
+	background-image: url('../assets/img/fancybox-y.png');
 }
 
 #fancybox-bg-nw {
 	top: -20px;
 	left: -20px;
-	background-image: url('../img/fancybox.png');
+	background-image: url('../assets/img/fancybox.png');
 	background-position: -40px -122px;
 }
 
@@ -302,7 +302,7 @@ table th{font-weight:bold !important}
 
 #fancybox-title-over {
 	padding: 10px;
-	background-image: url('../img/fancy_title_over.png');
+	background-image: url('../assets/img/fancy_title_over.png');
 	display: block;
 }
 
@@ -326,7 +326,7 @@ table th{font-weight:bold !important}
 
 #fancybox-title-float-left {
 	padding: 0 0 0 15px;
-	background: url('../img/fancybox.png') -40px -90px no-repeat;
+	background: url('../assets/img/fancybox.png') -40px -90px no-repeat;
 }
 
 #fancybox-title-float-main {
@@ -334,12 +334,12 @@ table th{font-weight:bold !important}
 	line-height: 29px;
 	font-weight: bold;
 	padding: 0 0 3px 0;
-	background: url('../img/fancybox-x.png') 0px -40px;
+	background: url('../assets/img/fancybox-x.png') 0px -40px;
 }
 
 #fancybox-title-float-right {
 	padding: 0 0 0 15px;
-	background: url('../img/fancybox.png') -55px -90px no-repeat;
+	background: url('../assets/img/fancybox.png') -55px -90px no-repeat;
 }
 
 /* IE6 */

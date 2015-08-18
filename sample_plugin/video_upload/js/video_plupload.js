@@ -48,7 +48,7 @@ jQuery(document).ready(function ($) {
                 $('#' + file.id + " .file_progress_wrapper").addClass('up_prog_load');
                 $('#' + file.id + " .fileprogress").width(file.percent + "%");
                 if (parseInt(file.percent) == 100) {
-                   $('#' + file.id + " .pro_text").html('<img src="'+ video_plupload_object.plugin_url +'/img/encoding.gif" alt="" />'); 
+                   $('#' + file.id + " .pro_text").html('<img src="'+ video_plupload_object.plugin_url +'/assets/img/encoding.gif" alt="" />'); 
                 } else {
                    $('#' + file.id + " .pro_text").html(file.percent + "%");
                 }

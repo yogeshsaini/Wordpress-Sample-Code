@@ -10,28 +10,28 @@
    </p>
    <?php endif; ?>
    <div class="box_wrapper">
-      <?php if (  isset(   $sampleData ) && !empty(   $sampleData ) && is_array( $sampleData )  ) : ?>
+      <?php if (  isset(   $sample_data ) && !empty(   $sample_data ) && is_array( $sample_data )  ) : ?>
       <div id="sample_box">
          <div class="align_center">
-            <div class="header_logo first"><img src="<?php print SAMPLE_URL; ?>/img/dm_head.jpg" alt="" /></div>
+            <div class="header_logo first"><img src="<?php print SAMPLE_URL; ?>/assets/img/dm_head.jpg" alt="" /></div>
             <div id="sample_box_conected">
-               <div class="right_arraow"><img src="<?php print SAMPLE_URL; ?>/img/right_sign.jpg" alt="" /></div>
+               <div class="right_arraow"><img src="<?php print SAMPLE_URL; ?>/assets/img/right_sign.jpg" alt="" /></div>
                <div class="connected"><?php _e('Your Sample account is connected', 'sample'); ?></div>
             </div>
             <div id="sample_box_conected" class="conected_second">
-               <div class="account_picture"><img src="<?php print $sampleData['user_photo']; ?>" alt="" /></div>
-               <div class="account_name"><?php print $sampleData['screenname']; ?></div>
+               <div class="account_picture"><img src="<?php print $sample_data['user_photo']; ?>" alt="" /></div>
+               <div class="account_name"><?php print $sample_data['screenname']; ?></div>
                <div class="disconnect_wrapper">
                   <a class="disconnect_account" rel="sample" href="#"><?php _e('Disconnect', 'sample'); ?></a>
-                  <img id="sample_throbber" src="<?php print SAMPLE_URL; ?>/img/throbber.gif" alt="" class="displaynone" />
+                  <img id="sample_throbber" src="<?php print SAMPLE_URL; ?>/assets/img/throbber.gif" alt="" class="displaynone" />
                </div>
                <div class="total_video">
                   <div><?php _e('Total videos'); ?></div>
-                  <div class="span_count"><?php  print $sampleData['total_record']; ?></div>
+                  <div class="span_count"><?php  print $sample_data['total_record']; ?></div>
                </div>
                <div class="total_video">
                   <div><?php _e('Last uploaded'); ?></div>
-                  <div class="span_count"><?php  print $sampleData['last_uploaded']; ?></div>
+                  <div class="span_count"><?php  print $sample_data['last_uploaded']; ?></div>
                </div>
             </div>
          </div>
@@ -59,11 +59,11 @@
       <?php else: ?>
       <div id="sample_box">
          <div class="align_center">
-            <div class="header_logo first"><img src="<?php print SAMPLE_URL; ?>/img/dm_head.jpg" alt="" /></div>
+            <div class="header_logo first"><img src="<?php print SAMPLE_URL; ?>/assets/img/dm_head.jpg" alt="" /></div>
             <?php if(empty($options4)) : ?>
             <a class="dm_pop_btn" id="dm_auth_popup" href="#sample_form_popup"><?php _e('Connect to Sample', 'sample'); ?></a>
             <?php else : ?>
-            <a class="dm_pop_btn" href="<?php print $sampleData; ?>"><?php _e('Connect to Sample', 'sample'); ?></a>
+            <a class="dm_pop_btn" href="<?php print $sample_data; ?>"><?php _e('Connect to Sample', 'sample'); ?></a>
             <?php endif; ?>
             <a class="sub_link" id="sub_link" target="_balnk" href="#sample_form_popup"><?php _e('or create a sample account', 'sample'); ?></a>
          </div>
@@ -102,17 +102,17 @@
       <?php if (   isset($options1) && !empty($options1)  ) : ?>
       <div id="sample_box" class="dmc-box">
          <div class="align_center">
-            <div class="header_logo"><img src="<?php print SAMPLE_URL; ?>/img/dm_cloud.jpg" alt="" /></div>
+            <div class="header_logo"><img src="<?php print SAMPLE_URL; ?>/assets/img/dm_cloud.jpg" alt="" /></div>
             <div id="sample_box_conected">
-               <div class="right_arraow"><img src="<?php print SAMPLE_URL; ?>/img/right_sign.jpg" alt="" /></div>
+               <div class="right_arraow"><img src="<?php print SAMPLE_URL; ?>/assets/img/right_sign.jpg" alt="" /></div>
                <div class="connected"><?php _e('Your Sample Cloud account is connected', 'sample'); ?></div>
             </div>
             <div id="sample_box_conected" class="conected_second">
-               <?php $data = $this->show_cloud_account_data(); ?>
+               <?php $data = $this->sp_show_cloud_account_data(); ?>
                <div class="account_name"><?php print $data['udata']; ?></div>
                <div class="disconnect_wrapper">
                   <a class="disconnect_account" rel="cloud" href="#"><?php _e('Disconnect', 'sample'); ?></a>
-                  <img id="cloud_throbber" src="<?php print SAMPLE_URL; ?>/img/throbber.gif" alt="" class="displaynone" />
+                  <img id="cloud_throbber" src="<?php print SAMPLE_URL; ?>/assets/img/throbber.gif" alt="" class="displaynone" />
                </div>
                <div class="total_video">
                   <div><?php _e('Total videos'); ?></div>
@@ -128,7 +128,7 @@
       <?php else: ?>
       <div id="sample_box" class="cloudbox">
          <div class="align_center">
-            <div class="header_logo"><img src="<?php print SAMPLE_URL; ?>/img/dynaamo-logo.png" alt="" /></div>
+            <div class="header_logo"><img src="<?php print SAMPLE_URL; ?>/assets/img/dynaamo-logo.png" alt="" /></div>
             <a id="cloud_form_link" class="cloud_pop_btn" href="#cloud_form_popup"><?php _e('Connect to your Dynaamo SmartCloud Account', 'sample'); ?></a>
             <a class="sub_link" id="cloud_register_trigger" href="javascript:void(0);"><?php _e('<strong>Your videos are hosted for Free but are public.</strong>', 'sample'); ?></a>
          </div>

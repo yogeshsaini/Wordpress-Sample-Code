@@ -116,7 +116,7 @@
 						$('#'+id+'_tag').blur();
 					}
 					
-					$.fn.tagsInput.updateTagsField(this,tagslist);
+					$.fn.tagsInput.sp_updateTagsField(this,tagslist);
 					
 					if (options.callback && tags_callbacks[id] && tags_callbacks[id]['onAddTag']) {
 						var f = tags_callbacks[id]['onAddTag'];
@@ -332,7 +332,7 @@
 	
 	};
 	
-	$.fn.tagsInput.updateTagsField = function(obj,tagslist) { 
+	$.fn.tagsInput.sp_updateTagsField = function(obj,tagslist) { 
 		var id = $(obj).attr('id');
 		$(obj).val(tagslist.join(delimiter[id]));
 	};

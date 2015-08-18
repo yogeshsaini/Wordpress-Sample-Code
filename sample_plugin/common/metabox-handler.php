@@ -14,7 +14,7 @@
                <div class="search">
                   <input type="text" name="sample_video_title" id="sample-video-title" value="" onblur="get_dm_videos_by_title('', this.value);" placeholder="Search videos on Dilymotion.com"/>
                </div>
-               <div class="metabox-loading-image-container"><img alt="ajax-loading" class="ajax-loading-img" src="<?php print SAMPLE_URL;?>/img/495.GIF" /></div>
+               <div class="metabox-loading-image-container"><img alt="ajax-loading" class="ajax-loading-img" src="<?php print SAMPLE_URL;?>/assets/img/495.GIF" /></div>
                <div id="sample_div_callback" class="metabox-video-list"></div>
             </div>
             <div id="my_video_div" class="metabox-data">
@@ -27,7 +27,7 @@
                <div class="search group-search">
                   <input type="text" name="my_video_title" id="my-video-title" value="" placehold="Search my videos"/>
                </div>
-               <div class="metabox-loading-image-container"><img alt="ajax-loading" class="ajax-loading-img" src="<?php print SAMPLE_URL;?>/img/495.GIF" /></div>
+               <div class="metabox-loading-image-container"><img alt="ajax-loading" class="ajax-loading-img" src="<?php print SAMPLE_URL;?>/assets/img/495.GIF" /></div>
                <div id="my_video_div_callback" class="metabox-video-list"></div>
             </div>
             <div class="clear"></div>

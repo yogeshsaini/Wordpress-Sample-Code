@@ -20,31 +20,31 @@ class My_Video_Gallery_Page
                                 $this->dcpass  = $dcpass;
                                 add_action( 'admin_menu', array(
                                                  $this,
-                                                'add_plugin_page' 
+                                                'sp_add_plugin_page' 
                                 ) );
                                 add_action( 'wp_ajax_delete_dm_cloud_records', array(
                                                  $this,
-                                                'delete_dm_cloud_records_callback' 
+                                                'sp_delete_dm_cloud_records_callback' 
                                 ) );
-                                add_action( 'wp_ajax_edit_dm_cloud_records', array(
+                                add_action( 'wp_ajax_sp_edit_dm_cloud_records', array(
                                                  $this,
-                                                'edit_dm_cloud_records' 
+                                                'sp_edit_dm_cloud_records' 
                                 ) );
-                                add_action( 'wp_ajax_delete_dm_cloud_metatags', array(
+                                add_action( 'wp_ajax_sp_delete_dm_cloud_metatags', array(
                                                  $this,
-                                                'delete_dm_cloud_metatags' 
+                                                'sp_delete_dm_cloud_metatags' 
                                 ) );
-                                add_action( 'wp_ajax_update_dm_cloud_metatags', array(
+                                add_action( 'wp_ajax_sp_update_dm_cloud_metatags', array(
                                                  $this,
-                                                'update_dm_cloud_metatags' 
+                                                'sp_update_dm_cloud_metatags' 
                                 ) );
                                 add_action( 'wp_ajax_action_upload_pattern', array(
                                                  $this,
-                                                'sample_cloud_upload_pattern' 
+                                                'sp_sample_cloud_upload_pattern' 
                                 ) );
                                 add_action( 'wp_ajax_samplecloud_change_gallery_records', array(
                                                  $this,
-                                                'get_sample_cloud_videos' 
+                                                'sp_get_sample_cloud_videos' 
                                 ) );
                 }
                 
@@ -52,12 +52,12 @@ class My_Video_Gallery_Page
                  * Add options page
                  *
                  */
-                public function add_plugin_page( )
+                public function sp_add_plugin_page( )
                 {
                                 //This page will be under "Settings"
                                 add_submenu_page( 'dm-admin-setting', 'Video Gallery', 'Gallery', 'read', 'video-gallery-page', array(
                                                  $this,
-                                                'video_gallery_page' 
+                                                'sp_video_gallery_page' 
                                 ) );
                 }
                 
@@ -65,7 +65,7 @@ class My_Video_Gallery_Page
                  * Callback Method for Sample cloud video gallery page
                  *
                  */
-                public function video_gallery_page( )
+                public function sp_video_gallery_page( )
                 {
                                 require_once SAMPLE_DIR . '/dmc/dm-cloud-video-gallery-html.php';
                 }
@@ -74,12 +74,12 @@ class My_Video_Gallery_Page
                  * Callback Method for Sample cloud video gallery page
                  *
                  */
-                public function get_sample_cloud_videos( $search_title = '', $sortby = '-created' )
+                public function sp_get_sample_cloud_videos( $search_title = '', $sortby = '-created' )
                 {
                                 $samplecloud           = new Sample_Cloud_OwnMethod( $this->dcuname, $this->dcpass );
                                 $pn                    = ( isset( $_GET['pagenum'] ) ) ? preg_replace( '#[^0-9]#i', '', $_GET['pagenum'] ) : 1;
-                                $itemsPerPage          = (int) self::ITEMS_PER_PAGE;
-                                $return_dmcloud_videos = $samplecloud->get_sample_cloud_videos( (int) $pn, $itemsPerPage, $search_title, $sortby );
+                                $items_per_page          = (int) self::ITEMS_PER_PAGE;
+                                $return_dmcloud_videos = $samplecloud->sp_get_sample_cloud_videos( (int) $pn, $items_per_page, $search_title, $sortby );
                                 return $return_dmcloud_videos;
                 }
                 
@@ -87,17 +87,17 @@ class My_Video_Gallery_Page
                  * Callback Method for Sample cloud video gallery page
                  *
                  */
-                public function get_dmc_keywords( $mediaId )
+                public function sp_get_dmc_keywords( $mediaId )
                 {
                                 $samplecloud = new Sample_Cloud_OwnMethod( $this->dcuname, $this->dcpass );
-                                return $samplecloud->get_sample_cloud_videosKeywords( $mediaId );
+                                return $samplecloud->sp_get_sample_cloud_videosKeywords( $mediaId );
                 }
                 
                 /**
                  * Method to delete Sample cloud video by media id
                  *
                  */
-                public function delete_dm_cloud_records_callback( )
+                public function sp_delete_dm_cloud_records_callback( )
                 {
                                 $media_id = ( $_POST['mediaId'] ) ? $_POST['mediaId'] : null;
                                 if ( !empty( $media_id ) ) {
@@ -114,14 +114,14 @@ class My_Video_Gallery_Page
                  * Method to edit Sample cloud video by media Id
                  *
                  */
-                public function edit_dm_cloud_records( )
+                public function sp_edit_dm_cloud_records( )
                 {
                                 $media_id = ( $_POST['mediaId'] ) ? $_POST['mediaId'] : null;
                                 if ( !empty( $media_id ) ) {
                                                 $samplecloud   = new Sample_Cloud_OwnMethod( $this->dcuname, $this->dcpass );
-                                                $videoInfo     = $samplecloud->get_sample_cloud_videosDetails( $media_id );
+                                                $video_info     = $samplecloud->sp_get_sample_cloud_videosDetails( $media_id );
                                                 $playerList    = $samplecloud->get_sample_cloud_player();
-                                                $mediaImageURL = !empty( $videoInfo['stream_url'] ) ? $videoInfo['stream_url'] : SAMPLE_URL . '/img/no_files_found.jpg';
+                                                $media_image_url = !empty( $video_info['stream_url'] ) ? $video_info['stream_url'] : SAMPLE_URL . '/assets/img/no_files_found.jpg';
                                                 $curpage       = !empty( $_POST['curpage'] ) ? $_POST['curpage'] : 'notfound';
                                                 $str           = '';
                                                 $str .= '<div class="dmc-edit-container dm-common">';
@@ -129,15 +129,15 @@ class My_Video_Gallery_Page
             <h2>Edit Video</h2>
             <span class="logo"></span>
             </div>';
-                                                $str .= '<script type="text/javascript" src="' . SAMPLE_URL . '/js/ajax-upload_pattern.js"></script>';
-                                                $str .= '<form enctype="multipart/form-data" action="" id="dm_update_form" method="post">';
+                                                $str .= '<script type="text/javascript" src="' . SAMPLE_URL . '/assets/js/ajax-upload_pattern.js"></script>';
+                                                $str .= '<form enctype="multipart/form-data" action="" id="dm_sp_update_form" method="post">';
                                                 $str .= '<input type="hidden" id="counter-value" value="1" />';
                                                 $str .= '<input type="hidden" id="curpage" name="curpage" value="' . $curpage . '" />';
-                                                $str .= '<input type="hidden" name="media_id" size="50" value="' . $videoInfo['media_id'] . '" />';
+                                                $str .= '<input type="hidden" name="media_id" size="50" value="' . $video_info['media_id'] . '" />';
                                                 $str .= '<div class="top-row">
             <div class="label">Thumbnail:</div>
             <div class="thumbnail">
-               <div class="thumb-img"><img class="edit-video-thumbnail" src="' . $mediaImageURL . '" alt="" /></div>
+               <div class="thumb-img"><img class="edit-video-thumbnail" src="' . $media_image_url . '" alt="" /></div>
                <div class="thumb-right">
               <a id="browse_file" href="#">Change Thumbnail</a>
               <input type="hidden" id="attach_id" name="at_id" value="" />
@@ -152,10 +152,10 @@ class My_Video_Gallery_Page
                                                 $str .= '<div class="middle-row">';
                                                 $str .= '<div class="head">Custom Tags</div>';
                                                 $str .= '<div class="middle-wrapper">';
-                                                $str .= '<div class="title"><label>Video Title:</label><input type="text" name="title" id="video-title" value="' . $videoInfo['meta']['title'] . '" /></div>';
+                                                $str .= '<div class="title"><label>Video Title:</label><input type="text" name="title" id="video-title" value="' . $video_info['meta']['title'] . '" /></div>';
                                                 $str .= '<div class="present-tags">';
-                                                if ( !empty( $videoInfo['meta'] ) ) {
-                                                                $metatags = $videoInfo['meta'];
+                                                if ( !empty( $video_info['meta'] ) ) {
+                                                                $metatags = $video_info['meta'];
                                                                 $i        = 1;
                                                                 foreach ( $metatags as $key => $val ) {
                                                                                 if ( $key != 'title' ) {
@@ -163,7 +163,7 @@ class My_Video_Gallery_Page
             <label>' . $key . '</label>
             <input type="hidden" size="50" class="keyInput" name="originalmeta[' . $key . '][]" value="' . $key . '" />
             <input type="text" name="originalmeta[' . $key . '][]" value="' . $val . '" />
-            <a class="delete-tag" onclick="deleteMetatags(\'' . $videoInfo['media_id'] . '\',\'' . $key . '\');" href="javascript:void(0);">Remove</a>
+            <a class="delete-tag" onclick="deleteMetatags(\'' . $video_info['media_id'] . '\',\'' . $key . '\');" href="javascript:void(0);">Remove</a>
              </div>';
                                                                                 }
                                                                                 $i++;
@@ -178,7 +178,7 @@ class My_Video_Gallery_Page
                                                 $str .= '<div class="bottom-row">';
                                                 $str .= '<div class="preview">
         <label>Preview</label>
-        <div class="iframe"><iframe width="338" height="150" frameborder="0" scrolling="no" src="' . $videoInfo['embed_url'] . '"></iframe></div>
+        <div class="iframe"><iframe width="338" height="150" frameborder="0" scrolling="no" src="' . $video_info['embed_url'] . '"></iframe></div>
          </div>';
                                                 $str .= '</div>';
                                                 $str .= '<div class="alert-msg" id="dmc-message"></div>';
@@ -193,7 +193,7 @@ class My_Video_Gallery_Page
                </div>
             </div>
             <div class="save">
-               <a class="save_new_data" onclick="return getDMCupdatedvalues();" href="javascript:void(0);">Save</a>
+               <a class="save_new_data" onclick="return getDMCsp_updatedvalues();" href="javascript:void(0);">Save</a>
             </div>
              </div>
            </div>';
@@ -208,7 +208,7 @@ class My_Video_Gallery_Page
                  * Method calling from ajax to delete the Sample cloud video meta tags
                  *
                  */
-                public function delete_dm_cloud_metatags( )
+                public function sp_delete_dm_cloud_metatags( )
                 {
                                 $mediaId = ( $_POST['mediaId'] ) ? $_POST['mediaId'] : null;
                                 $key     = ( $_POST['key'] ) ? $_POST['key'] : null;
@@ -221,10 +221,10 @@ class My_Video_Gallery_Page
                 }
                 
                 /**
-                 * Method to update Sample cloud Meta tags
+                 * Method to sp_update Sample cloud Meta tags
                  *
                  */
-                public function update_dm_cloud_metatags( )
+                public function sp_update_dm_cloud_metatags( )
                 {
                                 $meta             = array( );
                                 $originalmetameta = array( );
@@ -234,7 +234,7 @@ class My_Video_Gallery_Page
                                 if ( $mediaId ) {
                                                 $samplecloud   = new Sample_Cloud_OwnMethod( $this->dcuname, $this->dcpass );
                                                 $meta['title'] = !empty( $_POST['title'] ) ? $_POST['title'] : null;
-                                                $updatemeta    = !empty( $_POST['originalmeta'] ) ? array_keys( $_POST['originalmeta'] ) : null;
+                                                $sp_updatemeta    = !empty( $_POST['originalmeta'] ) ? array_keys( $_POST['originalmeta'] ) : null;
                                                 if ( !empty( $_POST['meta'] ) ) {
                                                                 foreach ( $_POST['meta'] as $key => $data ) {
                                                                                 if ( !empty( $data[0] ) && !empty( $data[1] ) ) {
@@ -252,8 +252,8 @@ class My_Video_Gallery_Page
                                                 if ( $imageurl ) {
                                                                 $samplecloud->set_sample_cloud_video_thumbnail( $mediaId, $imageurl );
                                                 }
-                                                if ( $updatemeta ) {
-                                                                $samplecloud->remove_sample_cloud_video_metas( $mediaId, $updatemeta );
+                                                if ( $sp_updatemeta ) {
+                                                                $samplecloud->remove_sample_cloud_video_metas( $mediaId, $sp_updatemeta );
                                                                 $samplecloud->set_sample_cloud_video_metas( $mediaId, $originalmetameta );
                                                 }
                                                 if ( $meta ) {
@@ -264,7 +264,7 @@ class My_Video_Gallery_Page
                                                                 $_SESSION['dmc_success'] = 'Your video was saved successfully.';
                                                 }
                                                 print json_encode( array(
-                                                                 'msg' => 'Succesfuly update data' 
+                                                                 'msg' => 'Succesfuly sp_update data' 
                                                 ) );
                                                 exit;
                                 }
@@ -274,7 +274,7 @@ class My_Video_Gallery_Page
                  * Method to upload thumbnail image
                  *
                  */
-                public function sample_cloud_upload_pattern( )
+                public function sp_sample_cloud_upload_pattern( )
                 {
                                 if ( !function_exists( 'wp_handle_upload' ) )
                                                 require_once( ABSPATH . 'wp-admin/includes/file.php' );
@@ -297,7 +297,7 @@ class My_Video_Gallery_Page
                                                 );
                                                 $attach_id   = wp_insert_attachment( $attachment, $file_loc );
                                                 $attach_data = wp_generate_attachment_metadata( $attach_id, $file_loc );
-                                                wp_update_attachment_metadata( $attach_id, $attach_data );
+                                                wp_sp_update_attachment_metadata( $attach_id, $attach_data );
                                                 $return = array(
                                                                  'data' => $attach_data,
                                                                 'id' => $attach_id,

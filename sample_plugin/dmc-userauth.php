@@ -20,7 +20,7 @@ class Dmc_Front_Outh_Form {
                  *
                  * @param $atts
                  */
-                function shortcode( $atts ) {
+                function sp_shortcode( $atts ) {
                                 
                                 extract( shortcode_atts( array(
                                                  'post_type' => 'post' 
@@ -45,7 +45,7 @@ class Dmc_Front_Outh_Form {
                  *
                  * @param $post_type
                  */
-                function dmc_auth_form( $post_type )  {
+                function sp_dmc_auth_form( $post_type )  {
                                 global $userdata;
                                 global $user_meta;
                                 global $dm_settings_page;
@@ -65,21 +65,21 @@ class Dmc_Front_Outh_Form {
     <div class="box_wrapper">
       <div id="sample_box" class="dmc-box front">
          <div class="align_center">
-            <div class="header_logo"><img src="<?php print SAMPLE_URL; ?>/img/dm_cloud.jpg" alt="" /></div>
+            <div class="header_logo"><img src="<?php print SAMPLE_URL; ?>/assets/img/dm_cloud.jpg" alt="" /></div>
             <div id="sample_box_conected">
-               <div class="right_arraow"><img src="<?php print SAMPLE_URL; ?>/img/right_sign.jpg" alt="" /></div>
+               <div class="right_arraow"><img src="<?php print SAMPLE_URL; ?>/assets/img/right_sign.jpg" alt="" /></div>
                <div class="connected"><?php _e( 'Your Sample Cloud account is connected', 'sample' ); ?></div>
             </div>
             <div id="sample_box_conected" class="conected_second">
                <?php
-                                                $data = $dm_settings_page->show_cloud_account_data();
+                                                $data = $dm_settings_page->sp_show_cloud_account_data();
 ?>
               <div class="account_name"><?php
                                                 print $data['udata'];
 ?></div>
                <div class="disconnect_wrapper">
                   <a class="disconnect_account" rel="cloud" href="#"><?php  _e( 'Disconnect', 'sample' ); ?></a>
-                  <img id="cloud_throbber" src="<?php print SAMPLE_URL; ?>/img/throbber.gif" alt="" class="displaynone" />
+                  <img id="cloud_throbber" src="<?php print SAMPLE_URL; ?>/assets/img/throbber.gif" alt="" class="displaynone" />
                </div>
                <div class="total_video">
                   <div><?php  _e( 'Total videos' ); ?></div>
@@ -99,7 +99,7 @@ class Dmc_Front_Outh_Form {
    <div class="box_wrapper">
       <div id="sample_box" class="cloudbox front">
          <div class="align_center">
-            <div class="header_logo"><img src="<?php  print SAMPLE_URL; ?>/img/dm_cloud.jpg" alt="" /></div>
+            <div class="header_logo"><img src="<?php  print SAMPLE_URL; ?>/assets/img/dm_cloud.jpg" alt="" /></div>
             <a id="cloud_form_link" class="cloud_pop_btn" href="#cloud_form_popup"><?php  _e( 'Connect your Sample Cloud account', 'sample' ); ?></a>
             <a class="sub_link" target="_balnk" href="https://www.dmcloud.net/"><?php  _e( 'or start a free trail with Sample Cloud', 'sample' ); ?></a>
          </div>
@@ -111,7 +111,7 @@ class Dmc_Front_Outh_Form {
            <div class="wrap11">
               <form onsubmit="return cloud_settings_form_submit(this);" action="options.php" method="post" id="cloud_settings_form">
                  <?php wp_nonce_field( 'dmc-front-auth' ); ?>
-                <input type="hidden" value="update" name="action">
+                <input type="hidden" value="sp_update" name="action">
                  <input type="hidden" value="dm_cloud_option_group" name="option_page">
                  <input type="hidden" value="front" name="_front_flag">
                  <table class="form-table">

@@ -81,7 +81,7 @@ jQuery(document).ready(function() {
             jQuery(this).find('span.popbox').fadeIn();
             var copy_sel = $('.button-container a.meta-copy');
             copy_sel.clipboard({
-                path: ajax_object.sample_url + '/js/clipboard/jquery.clipboard.swf',
+                path: ajax_object.sample_url + '/assets/js/clipboard/jquery.clipboard.swf',
                 copy: function() {
                     var this_sel = $(this);
                     return this_sel.next().html();
@@ -166,7 +166,7 @@ function renderDMCloudVideos(pn, searchTitle) {
         pageno = pn;
     }
     var data = {
-        action: 'get_my_dmc_video_metabox_tab_videos',
+        action: 'sp_get_my_dmc_video_metabox_tab_videos',
         pagenumber: pageno,
         title: searchTitle
     };
@@ -187,7 +187,7 @@ function renderDMCloudVideos(pn, searchTitle) {
                     if (data.videos[i].stream_url != '' && data.videos[i].stream_url != null) {
                         var thumburl = data.videos[i].stream_url;
                     } else {
-                        var thumburl = ajax_object.sample_url + '/img/no_files_found.jpg';
+                        var thumburl = ajax_object.sample_url + '/assets/img/no_files_found.jpg';
                     }
                     stringelement += '<li>';
                     stringelement += '<div class="meta-image">';
@@ -268,7 +268,7 @@ function renderDMVideos(pn) {
                 if (response.list[i].thumbnail_url != '' && response.list[i].thumbnail_url != null) {
                     var thumburl = response.list[i].thumbnail_url;
                 } else {
-                    var thumburl = ajax_object.sample_url + '/img/no_files_found.jpg';
+                    var thumburl = ajax_object.sample_url + '/assets/img/no_files_found.jpg';
                 }
                 stringelement += '<li>';
                 stringelement += '<div class="meta-image">';
@@ -327,7 +327,7 @@ function get_dm_videos_by_title(pn, title) {
         } else {
             pageno = pn;
         }
-        //  jQuery.getJSON('http://freegeoip.net/json/', function (location) {
+        //  jQuery.getJSON('http://freegeoip.net/assets/json/', function (location) {
         // var countryCode = location.country_code.toLowerCase();
         DM.api('/videos?sort=relevance', {
             page: pageno,
@@ -352,7 +352,7 @@ function get_dm_videos_by_title(pn, title) {
                     if (response.list[i].thumbnail_url != '' && response.list[i].thumbnail_url != null) {
                         var thumburl = response.list[i].thumbnail_url;
                     } else {
-                        var thumburl = ajax_object.sample_url + '/img/no_files_found.jpg';
+                        var thumburl = ajax_object.sample_url + '/assets/img/no_files_found.jpg';
                     }
                     stringelement += '<li>';
                     stringelement += '<div class="meta-image">';
@@ -409,7 +409,7 @@ function renderMyDMVideos(pn, searchTitle) {
     jQuery("#my_video_div_callback").html('');
     jQuery(".metabox-loading-image-container").show();
     var data = {
-        action: 'get_my_dm_video_metabox_tab_videos',
+        action: 'sp_get_my_dm_video_metabox_tab_videos',
         pagenumber: pageno,
         title: searchTitle
     };
@@ -438,7 +438,7 @@ function renderMyDMVideos(pn, searchTitle) {
                     if (data.videos[i].thumbnail_url != '' && data.videos[i].thumbnail_url != null) {
                         var thumburl = data.videos[i].thumbnail_url;
                     } else {
-                        var thumburl = ajax_object.sample_url + '/img/no_files_found.jpg';
+                        var thumburl = ajax_object.sample_url + '/assets/img/no_files_found.jpg';
                     }
                     stringelement += '<li>';
                     stringelement += '<div class="meta-image">';

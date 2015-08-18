@@ -23,7 +23,7 @@ class DM_Settings_Page
                 public function __construct( ) {
                                 add_action( 'admin_menu', array(
                                                  $this,
-                                                'add_plugin_page' 
+                                                'sp_add_plugin_page' 
                                 ) );
                                 add_action( 'admin_init', array(
                                                  $this,
@@ -55,15 +55,15 @@ class DM_Settings_Page
                                 ) );
                                 add_action( 'user_register', array(
                                                  $this,
-                                                'sample_registration_save' 
+                                                'sp_sample_registration_save' 
                                 ), 50, 1 );
                                 add_filter( 'wp_login_errors', array(
                                                  $this,
-                                                'override_reg_complete_msg' 
+                                                'sp_override_reg_complete_msg' 
                                 ), 10, 2 );
                                 add_action( 'login_message', array(
                                                  $this,
-                                                'change_login_message' 
+                                                'sp_change_login_message' 
                                 ) );
                                 add_action( 'wp_ajax_create_dm_cloud_account', array(
                                                  $this,
@@ -74,16 +74,16 @@ class DM_Settings_Page
                 /**
                  *  create user account on sample cloud when new user register
                  */
-                public function sample_registration_save( $user_id )  {
+                public function sp_sample_registration_save( $user_id )  {
                                 global $wpdb;
                                 $uid     = $user_id;
                                 $user_id = '53a17d14947399435432a24f';
                                 $api_key = '853c339e3f50a3e3ad9443db2bd12315cfde26ad';
                                 
-                                $DmcOwnMethod = new Sample_Cloud_OwnMethod( $user_id, $api_key );
+                                $dmc_own_method = new Sample_Cloud_OwnMethod( $user_id, $api_key );
                                 $email        = !empty( $_POST['user_email'] ) ? $_POST['user_email'] : $_POST['email'];
                                 $user_login   = !empty( $_POST['user_login'] ) ? $_POST['user_login'] : '';
-                                $returndata   = (array) $DmcOwnMethod->create_new_user_on_organigation( $user_id, $user_login, $email );
+                                $returndata   = (array) $dmc_own_method->create_new_user_on_organigation( $user_id, $user_login, $email );
                                 if ( !empty( $returndata['error'] ) && ( trim( $returndata['error']['message'] ) != trim( "Error Msg : $user_login / $email" ) ) ) {
                                                 $errors = new WP_Error();
                                                 $errors->add( 'sample', __( $returndata['error']['message'] ), 'error' );
@@ -100,7 +100,7 @@ class DM_Settings_Page
                                 wp_mail( $email, $subject, $message, $headers );
                 }
                 
-                function override_reg_complete_msg( $errors, $redirect_to )  {
+                function sp_override_reg_complete_msg( $errors, $redirect_to )  {
                                 //print_r($errors);
                                 if ( isset( $errors->errors['registered'] ) ) {
                                                 $needle = __( 'Registration complete. Please check your e-mail.' );
@@ -113,11 +113,11 @@ class DM_Settings_Page
                                 return $errors;
                 }
                 
-                function change_login_message( $message ) {
+                function sp_change_login_message( $message ) {
                                 // change messages that contain 'Register'
                                 if ( strpos( $message, 'Register' ) !== FALSE ) {
-                                                $newMessage = "You are creating an account on " . get_bloginfo( 'name' ) . " and on Dynaamo powered by Sample. Your videos will be managed by Dynaamo.";
-                                                return '<p class="message register">' . $newMessage . '</p>';
+                                                $new_message = "You are creating an account on " . get_bloginfo( 'name' ) . " and on Dynaamo powered by Sample. Your videos will be managed by Dynaamo.";
+                                                return '<p class="message register">' . $new_message . '</p>';
                                 } else {
                                                 return $message;
                                 }
@@ -126,35 +126,35 @@ class DM_Settings_Page
                 /**
                  * Add options page
                  */
-                public function add_plugin_page( ) {
+                public function sp_add_plugin_page( ) {
                                 // This page will be under "Settings"
                                 add_menu_page( 'Sample Admin Settings', 'Dynaamo', 'read', 'dm-admin-setting', array(
                                                  $this,
-                                                'create_admin_page' 
+                                                'sp_create_admin_page' 
                                 ) );
                                 
                                 add_submenu_page( 'dm-admin-setting', 'Sample Admin Settings', 'Settings', 'read', 'dm-admin-setting', array(
                                                  $this,
-                                                'create_admin_page' 
+                                                'sp_create_admin_page' 
                                 ) );
                 }
                 
                 /**
                  * Options page callback
                  */
-                public function create_admin_page( )  {
+                public function sp_create_admin_page( )  {
                                 global $user_meta;
                                 global $dm_option_auth;
                                 global $dm_session_store;
                                 global $pub_option_name;
                                 
-                                $sampleData = '';
+                                $sample_data = '';
                                 $options1   = ( $user_meta ) ? $user_meta : array( );
                                 $options2   = ( $pub_option_name ) ? $pub_option_name : array( );
                                 $options3   = ( $dm_session_store ) ? $dm_session_store : array( );
                                 $options4   = ( $dm_option_auth ) ? $dm_option_auth : array( );
                                 if ( !empty( $options4 ) ) {
-                                                $sampleData = $this->conection_sample();
+                                                $sample_data = $this->sp_conection_sample();
                                 }
                                 $this->options = $options1 + $options2 + $options3;
                                 include_once( "cloud_auth_form.php" );
@@ -166,7 +166,7 @@ class DM_Settings_Page
                 public function page_init( )  {
                                 register_setting( 'dm_cloud_option_group', 'dm_cloud_option_name', array(
                                                  $this,
-                                                'sanitize' 
+                                                'sp_sanitize' 
                                 ) );
                                 
                                 add_settings_section( 'setting_section_id', '', array(
@@ -174,13 +174,13 @@ class DM_Settings_Page
                                                 'print_section_info' 
                                 ), 'my-setting-admin' );
                                 
-                                //<span class="qus_mark tooltip"><span><img class="callout" src="'.SAMPLE_URL . '/img/callout.gif" />The UserID is available on the profile page of your Sample Cloud account.</span></span>
+                                //<span class="qus_mark tooltip"><span><img class="callout" src="'.SAMPLE_URL . '/assets/img/callout.gif" />The UserID is available on the profile page of your Sample Cloud account.</span></span>
                                 add_settings_field( 'cloud_user_id_number', 'UserID:', array(
                                                  $this,
                                                 'cloud_user_id_number_callback' 
                                 ), 'my-setting-admin', 'setting_section_id' );
                                 
-                                //<span class="qus_mark tooltip"><span><img class="callout" src="'.SAMPLE_URL . '/img/callout.gif" />The APIKey is available on the profile page of your Sample Cloud account.</span></span>
+                                //<span class="qus_mark tooltip"><span><img class="callout" src="'.SAMPLE_URL . '/assets/img/callout.gif" />The APIKey is available on the profile page of your Sample Cloud account.</span></span>
                                 add_settings_field( 'cloud_api_key', 'APIKey:', array(
                                                  $this,
                                                 'cloud_api_key_callback' 
@@ -192,7 +192,7 @@ class DM_Settings_Page
                  *
                  * @param array $input Contains all settings fields as array keys
                  */
-                public function sanitize( $input ) {
+                public function sp_sanitize( $input ) {
                                 $new_input = array( );
                                 
                                 if ( empty( $input['cloud_user_id_number'] ) ) {
@@ -303,7 +303,7 @@ class DM_Settings_Page
                  * Get the settings option array and print one of its values
                  */
                 public function publisher_id_callback( ) {
-                                printf( '<input type="text" id="publisher_id" size="40" name="publish_id_option_name[publisher_id]" value="%s" /><span class="qus_mark tooltip"><span><img class="callout" src="' . SAMPLE_URL . '/img/callout.gif" />
+                                printf( '<input type="text" id="publisher_id" size="40" name="publish_id_option_name[publisher_id]" value="%s" /><span class="qus_mark tooltip"><span><img class="callout" src="' . SAMPLE_URL . '/assets/img/callout.gif" />
            Sample Publisher allows you to earn advertising revenue when sharing Sample videos on your site.</span></span>', !empty( $this->options[0]['publisher_id'] ) ? esc_attr( $this->options[0]['publisher_id'] ) : '' );
                 }
                 
@@ -322,7 +322,7 @@ class DM_Settings_Page
                                                                 $output .= '<option value="' . $ck . '" ' . $selected . '>' . $cv . '</option>';
                                                 }
                                 }
-                                $output .= '</select><span class="qus_mark tooltip"><span><img class="callout" src="' . SAMPLE_URL . '/img/callout.gif" />Sample Publisher allows you to earn advertising revenue when sharing Sample videos on your site.</span></span>';
+                                $output .= '</select><span class="qus_mark tooltip"><span><img class="callout" src="' . SAMPLE_URL . '/assets/img/callout.gif" />Sample Publisher allows you to earn advertising revenue when sharing Sample videos on your site.</span></span>';
                                 print $output;
                 }
                 
@@ -422,9 +422,9 @@ class DM_Settings_Page
                                                 $auth = 'BOTH_DISCONNECTED';
                                 }
                                 
-                                $publisherSettings = @$pub_option_name;
-                                $publisherId       = ( !empty( $publisherSettings[0]['publisher_id'] ) ) ? $publisherSettings[0]['publisher_id'] : '';
-                                $parameter         = ( isset( $publisherId ) && !empty( $publisherId ) ) ? "?syndication=$publisherId" : '';
+                                $publisher_settings = @$pub_option_name;
+                                $publisher_id       = ( !empty( $publisher_settings[0]['publisher_id'] ) ) ? $publisher_settings[0]['publisher_id'] : '';
+                                $parameter         = ( isset( $publisher_id ) && !empty( $publisher_id ) ) ? "?syndication=$publisher_id" : '';
                                 $pluginurl         = SAMPLE_URL;
                                 if ( in_array( $hook_suffix, array(
                                                  'toplevel_page_dm-admin-setting',
@@ -432,42 +432,42 @@ class DM_Settings_Page
                                                 'dynaamo_page_video-gallery-page',
                                                 'admin_page_dm-video-gallery' 
                                 ) ) ) {
-                                                wp_register_style( 'sample.css', $pluginurl . '/css/sample.css', array( ), '2.5.9' );
+                                                wp_register_style( 'sample.css', $pluginurl . '/assets/css/sample.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'sample.css' );
                                                 
-                                                wp_register_style( 'jquery.fancybox-1.3.4.css', $pluginurl . '/css/jquery.fancybox-1.3.4.css', array( ), '2.5.9' );
+                                                wp_register_style( 'jquery.fancybox-1.3.4.css', $pluginurl . '/assets/css/jquery.fancybox-1.3.4.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'jquery.fancybox-1.3.4.css' );
                                                 
-                                                wp_register_style( 'jquery.tagsinput.css', $pluginurl . '/css/jquery.tagsinput.css', array( ), '2.5.9' );
+                                                wp_register_style( 'jquery.tagsinput.css', $pluginurl . '/assets/css/jquery.tagsinput.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'jquery.tagsinput.css' );
                                                 
-                                                wp_register_style( 'jquery-ui.css', $pluginurl . '/css/jquery-ui.css', array( ), '2.5.9' );
+                                                wp_register_style( 'jquery-ui.css', $pluginurl . '/assets/css/jquery-ui.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'jquery-ui.css' );
                                                 
-                                                wp_register_style( 'pagination.css', $pluginurl . '/css/pagination.css', array( ), '2.5.9' );
+                                                wp_register_style( 'pagination.css', $pluginurl . '/assets/css/pagination.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'pagination.css' );
                                                 
-                                                wp_register_script( 'jquery-1.7.2.min.js', $pluginurl . '/js/jquery-1.7.2.min.js', array(
+                                                wp_register_script( 'jquery-1.7.2.min.js', $pluginurl . '/assets/js/jquery-1.7.2.min.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'jquery-1.7.2.min.js' );
                                                 
-                                                wp_register_script( 'jquery.tagsinput.js', $pluginurl . '/js/jquery.tagsinput.js', array(
+                                                wp_register_script( 'jquery.tagsinput.js', $pluginurl . '/assets/js/jquery.tagsinput.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'jquery.tagsinput.js' );
                                                 
-                                                wp_register_script( 'jquery-ui.min.js', $pluginurl . '/js/jquery-ui.min.js', array(
+                                                wp_register_script( 'jquery-ui.min.js', $pluginurl . '/assets/js/jquery-ui.min.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'jquery-ui.min.js' );
                                                 
-                                                wp_register_script( 'jquery.fancybox-1.3.4.js', $pluginurl . '/js/jquery.fancybox-1.3.4.js', array(
+                                                wp_register_script( 'jquery.fancybox-1.3.4.js', $pluginurl . '/assets/js/jquery.fancybox-1.3.4.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'jquery.fancybox-1.3.4.js' );
                                                 
-                                                wp_register_script( 'sample.js', $pluginurl . '/js/sample.js', array(
+                                                wp_register_script( 'sample.js', $pluginurl . '/assets/js/sample.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'sample.js' );
@@ -479,7 +479,7 @@ class DM_Settings_Page
                                                                 'parameter' => $parameter 
                                                 ) );
                                                 
-                                                wp_enqueue_script( 'ajax-upload-pattern', $pluginurl . '/js/ajax-upload_pattern.js', array(
+                                                wp_enqueue_script( 'ajax-upload-pattern', $pluginurl . '/assets/js/ajax-upload_pattern.js', array(
                                                                  'plupload-all',
                                                                 'jquery' 
                                                 ), 1.0 );
@@ -493,7 +493,7 @@ class DM_Settings_Page
                                                 wp_enqueue_script( 'all.js' );
                                                 
                                                 
-                                                wp_register_script( 'analytic', $pluginurl . '/js/analytic.js', array(
+                                                wp_register_script( 'analytic', $pluginurl . '/assets/js/analytic.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9', true );
                                                 wp_enqueue_script( 'analytic' );
@@ -503,7 +503,7 @@ class DM_Settings_Page
                                                 'post.php' 
                                 ) ) || ( is_page() || is_single() ) ) {
                                                 
-                                                wp_register_script( 'jquery-1.7.2.min.js', $pluginurl . '/js/jquery-1.7.2.min.js', array(
+                                                wp_register_script( 'jquery-1.7.2.min.js', $pluginurl . '/assets/js/jquery-1.7.2.min.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'jquery-1.7.2.min.js' );
@@ -512,17 +512,17 @@ class DM_Settings_Page
                                                                 wp_enqueue_script( 'media-upload' );
                                                 }
                                                 
-                                                wp_register_script( 'jquery.clipboard.js', $pluginurl . '/js/clipboard/jquery.clipboard.js', array(
+                                                wp_register_script( 'jquery.clipboard.js', $pluginurl . '/assets/js/clipboard/jquery.clipboard.js', array(
                                                                  'jquery' 
                                                 ), '1.0.4' );
                                                 wp_enqueue_script( 'jquery.clipboard.js' );
                                                 
-                                                wp_register_script( 'jquery.hoverIntent.js', $pluginurl . '/js/jquery.hoverIntent.js', array(
+                                                wp_register_script( 'jquery.hoverIntent.js', $pluginurl . '/assets/js/jquery.hoverIntent.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'jquery.hoverIntent.js' );
                                                 
-                                                wp_register_script( 'metabox_scripts.js', $pluginurl . '/js/metabox_scripts.js', array(
+                                                wp_register_script( 'metabox_scripts.js', $pluginurl . '/assets/js/metabox_scripts.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'metabox_scripts.js' );
@@ -538,30 +538,30 @@ class DM_Settings_Page
                                                                 'front_page_url' => get_permalink( get_option( 'dmcauthenticate_page_id' ) ) 
                                                 ) );
                                                 
-                                                wp_register_style( 'metabox.css', $pluginurl . '/css/metabox.css', array( ), '2.5.9' );
+                                                wp_register_style( 'metabox.css', $pluginurl . '/assets/css/metabox.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'metabox.css' );
                                                 
-                                                wp_register_style( 'jquery.fancybox-1.3.4.css', $pluginurl . '/css/jquery.fancybox-1.3.4.css', array( ), '2.5.9' );
+                                                wp_register_style( 'jquery.fancybox-1.3.4.css', $pluginurl . '/assets/css/jquery.fancybox-1.3.4.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'jquery.fancybox-1.3.4.css' );
                                                 
-                                                wp_register_script( 'jquery.fancybox-1.3.4.js', $pluginurl . '/js/jquery.fancybox-1.3.4.js', array(
+                                                wp_register_script( 'jquery.fancybox-1.3.4.js', $pluginurl . '/assets/js/jquery.fancybox-1.3.4.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'jquery.fancybox-1.3.4.js' );
                                                 
-                                                wp_register_style( 'sample.css', $pluginurl . '/css/sample.css', array( ), '2.5.9' );
+                                                wp_register_style( 'sample.css', $pluginurl . '/assets/css/sample.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'sample.css' );
                                                 
-                                                wp_register_script( 'sample.js', $pluginurl . '/js/sample.js', array( ), '2.5.9' );
+                                                wp_register_script( 'sample.js', $pluginurl . '/assets/js/sample.js', array( ), '2.5.9' );
                                                 wp_enqueue_script( 'sample.js' );
                                                 
                                                 wp_register_script( 'all.js', 'http://api.dmcdn.net/all.js', array( ), '2.5.9' );
                                                 wp_enqueue_script( 'all.js' );
                                                 
-                                                wp_register_script( 'analytic', $pluginurl . '/js/analytic.js', array( ), '2.5.9', true );
+                                                wp_register_script( 'analytic', $pluginurl . '/assets/js/analytic.js', array( ), '2.5.9', true );
                                                 wp_enqueue_script( 'analytic' );
                                 } else {
-                                                wp_register_style( 'menu.css', $pluginurl . '/css/menu.css', array( ), '2.5.9' );
+                                                wp_register_style( 'menu.css', $pluginurl . '/assets/css/menu.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'menu.css' );
                                 }
                 }
@@ -697,8 +697,8 @@ class DM_Settings_Page
                                 $user_id      = '53a17d14947399435432a24f';
                                 $api_key      = '853c339e3f50a3e3ad9443db2bd12315cfde26ad';
                                 
-                                $DmcOwnMethod = new Sample_Cloud_OwnMethod( $user_id, $api_key );
-                                $returndata   = (array) $DmcOwnMethod->create_new_user_on_organigation( $user_id, $username, $useremail );
+                                $dmc_own_method = new Sample_Cloud_OwnMethod( $user_id, $api_key );
+                                $returndata   = (array) $dmc_own_method->create_new_user_on_organigation( $user_id, $username, $useremail );
                                 if ( isset( $returndata['id'] ) && !empty( $returndata['id'] ) ) {
                                                 $subject   = 'Sample cloud Account Detail';
                                                 $headers[] = 'From: ' . get_option( 'blogname' ) . ' <' . get_option( 'admin_email' ) . '>';
@@ -727,7 +727,7 @@ class DM_Settings_Page
                 /**
                  *
                  */
-                public function conection_sample( )  {
+                public function sp_conection_sample( )  {
                                 $sample_own_method = new sample_own_method();
                                 
                                 try {

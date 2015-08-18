@@ -18,8 +18,8 @@
       </div>
       <div id="tabs-navigation">
          <ul>
-            <li><a href="<?php echo SAMPLE_ADMIN_URL; ?>admin.php?page=dm-video-gallery"><img src="<?php echo SAMPLE_URL; ?>/img/daily_tab_head.png" alt="Sample" /></a></li>
-            <li><a href="<?php echo SAMPLE_ADMIN_URL; ?>admin.php?page=video-gallery-page" class="active-select"><img src="<?php echo SAMPLE_URL; ?>/img/dynaamo_tab_head.png" alt="Sample Cloud" /></a></li>
+            <li><a href="<?php echo SAMPLE_ADMIN_URL; ?>admin.php?page=dm-video-gallery"><img src="<?php echo SAMPLE_URL; ?>/assets/img/daily_tab_head.png" alt="Sample" /></a></li>
+            <li><a href="<?php echo SAMPLE_ADMIN_URL; ?>admin.php?page=video-gallery-page" class="active-select"><img src="<?php echo SAMPLE_URL; ?>/assets/img/dynaamo_tab_head.png" alt="Sample Cloud" /></a></li>
 
          </ul>
       </div>
@@ -29,13 +29,13 @@
          <?php
 
             if (	isset($credents) && !empty($credents)	) {
-               $dmcVideos = $this->get_sample_cloud_videos($search_title, $selected);
-               if (count($dmcVideos) > 0 || $search_title != '') {
+               $dmc_videos = $this->sp_get_sample_cloud_videos($search_title, $selected);
+               if (count($dmc_videos) > 0 || $search_title != '') {
                ?>
              <div id="sample-cloud">
             <div class="search-form">
                <div class="overlay"></div>
-               <div class="loading-image-container"><img alt="ajax-loading" class="ajax-loading-img" src="<?php echo SAMPLE_URL; ?>/img/495.GIF" /></div>
+               <div class="loading-image-container"><img alt="ajax-loading" class="ajax-loading-img" src="<?php echo SAMPLE_URL; ?>/assets/img/495.GIF" /></div>
                <form class="search" id="dmc_filter" method="get" action="">
                   <input type="hidden" value="<?=$_REQUEST['page'];?>" name="page">
                   <input type="text" name="dmc_video_title" id="dmc-video-title" value="<?php if(isset($_REQUEST['dmc_video_title'])) {print $_REQUEST['dmc_video_title'];}?>" placeholder="Search my videos"/>
@@ -57,8 +57,8 @@
                </form>
                <?php
                if (	$search_title != ''	) {
-                     if (isset($dmcVideos['total_record'])) {
-                           $found = $dmcVideos['total_record'];
+                     if (isset($dmc_videos['total_record'])) {
+                           $found = $dmc_videos['total_record'];
                         } else {
                            $found = 0;
                         }
@@ -68,8 +68,8 @@
             </div>
             <div id="samplecloud-display-section">
                <?php
-               if (	isset($dmcVideos['total_pages']) && count($dmcVideos['total_pages']) > 0	) {
-                     $nr = $dmcVideos['total_pages'];
+               if (	isset($dmc_videos['total_pages']) && count($dmc_videos['total_pages']) > 0	) {
+                     $nr = $dmc_videos['total_pages'];
                      $page_links = paginate_links( array(
                                  'base' => add_query_arg( 'pagenum', '%#%' ),
                                  'format' => '',
@@ -80,14 +80,14 @@
                                  ) );
 
                      if (	$page_links	):
-                        echo '<div class="dsl-pager"><span class="total-records italic">'.$dmcVideos['total_record'].' items</span><span class="paging-display">'. $page_links . '</span></div>';
+                        echo '<div class="dsl-pager"><span class="total-records italic">'.$dmc_videos['total_record'].' items</span><span class="paging-display">'. $page_links . '</span></div>';
                      endif;
                ?>
 
                <table width="100%" class="video-gallery-container" cellpadding="0" cellspacing="0">
                   <?php
-                     foreach ($dmcVideos['videos'] as $video) {
-                        $mediaImageURL = ($video['stream_url']) ? $video['stream_url'] : SAMPLE_URL . '/img/no_files_found.jpg';
+                     foreach ($dmc_videos['videos'] as $video) {
+                        $media_image_url = ($video['stream_url']) ? $video['stream_url'] : SAMPLE_URL . '/assets/img/no_files_found.jpg';
                         if (strlen($video['title']) > 167) {
                           $title = substr(strip_tags($video['title']), 0, 167) . '...';
                         } else {
@@ -95,7 +95,7 @@
                         }
                   ?>
                   <tr class="dmc-gallery-rows">
-			    <td class="image"><img class="video-thumbnail" src="<?php print $mediaImageURL ;?>" alt="<?php print $video['embed_url'];?>" title="<?php print $video['title'];?>" /><span class="dmc-play-time"><?php print $video['duration'];?></span></td>
+			    <td class="image"><img class="video-thumbnail" src="<?php print $media_image_url ;?>" alt="<?php print $video['embed_url'];?>" title="<?php print $video['title'];?>" /><span class="dmc-play-time"><?php print $video['duration'];?></span></td>
 			    <td class="Vtitle"><div class="dmc-title"><?php print $title ;?></div><div class="views-container"><span class="italic"><?php print $video['total_view'];?> views</span></div>
                             <div class="hide-option">
                                 <a class="dmc-edit-trigger" onclick="editDMCvideo('<?php print $video['media_id'] ;?>');" href="javascript:void(0);">Edit</a>
@@ -108,7 +108,7 @@
                                         </div>
                                 <a class="view-trigger" href="javascript:void(0);">view</a>
                             </div></td>
-			    <td class="created"><?php print $video['created'];?><div class="dmc-keywords"><?php print $this->get_dmc_keywords($video['media_id']);?></div></td>
+			    <td class="created"><?php print $video['created'];?><div class="dmc-keywords"><?php print $this->sp_get_dmc_keywords($video['media_id']);?></div></td>
 			 </tr>
                   <?php } ?>
                </table>
@@ -119,8 +119,8 @@
                   </div>';
                 } ?>
                <?php
-                  if (isset($dmcVideos['total_pages']) && count($dmcVideos['total_pages']) > 0 && $page_links):
-                     echo '<div class="dm-paging"><div class="dsl-pager"><span class="paging-display"><span class="total-records italic">'.$dmcVideos['total_record'].' items</span>'. $page_links . '</span></div></div>';
+                  if (isset($dmc_videos['total_pages']) && count($dmc_videos['total_pages']) > 0 && $page_links):
+                     echo '<div class="dm-paging"><div class="dsl-pager"><span class="paging-display"><span class="total-records italic">'.$dmc_videos['total_record'].' items</span>'. $page_links . '</span></div></div>';
                   endif;
                ?>
             </div>

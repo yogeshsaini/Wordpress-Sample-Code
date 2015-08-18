@@ -33,12 +33,12 @@ class DMC_Front_Login
                                 ) );
                 }
                 
-                public function activate( )
+                public function sp_activate( )
                 {
                                 
                 }
                 
-                public function deactivate( )
+                public function sp_deactivate( )
                 {
                                 if ( !current_user_can( 'activate_plugins' ) ) {
                                                 return;
@@ -62,7 +62,7 @@ class DMC_Front_Login
                                 delete_metadata( $meta_type, $user_id, $meta_key_token, $meta_value, $delete_all );
                 }
                 
-                public function uninstall( )
+                public function sp_uninstall( )
                 {
                                 
                 }
@@ -78,7 +78,7 @@ $pub_option_name  = get_user_meta( $current_user->ID, 'publish_id_option_name', 
 require_once SAMPLE_DIR . '/file_config.php';
 
 $dm_settings_page   = new DM_Settings_Page();
-$MyvideoGalleryPage = new My_Video_Gallery_Page( @$user_meta[0]['cloud_user_id_number'], @$user_meta[0]['cloud_api_key'] );
-$DMvideoGalleryPage = new Sample_Video_Gallery_Page( @$user_meta[0]['cloud_user_id_number'], @$user_meta[0]['cloud_api_key'] );
+$my_sp_video_gallery_page = new My_Video_Gallery_Page( @$user_meta[0]['cloud_user_id_number'], @$user_meta[0]['cloud_api_key'] );
+$dm_sp_video_gallery_page = new Sample_Video_Gallery_Page( @$user_meta[0]['cloud_user_id_number'], @$user_meta[0]['cloud_api_key'] );
 $metabox            = new Meta_Box_Page( @$user_meta[0]['cloud_user_id_number'], @$user_meta[0]['cloud_api_key'] );
 $upload             = new Video_Upload( @$user_meta[0]['cloud_user_id_number'], @$user_meta[0]['cloud_api_key'] ); 

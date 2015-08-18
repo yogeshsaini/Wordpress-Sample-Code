@@ -36,7 +36,7 @@ font-weight:bold;}
 #full_wrapper .main-gallery-container .infomation_form { border: 1px solid #DDDDDD; padding-left: 0; }
 #full_wrapper .main-gallery-container .infomation_form { background: #FFFFFF; font-size: 14px; }
 #full_wrapper .main-gallery-container .infomation_form { background: #FFFFFF; border-radius: 0; display: table; position: relative; width: 98%; }
-.main-gallery-container .infomation_form .wrap .icon { background: url("../../img/not_connected.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+.main-gallery-container .infomation_form .wrap .icon { background: url("../../assets/img/not_connected.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 height: 74px; margin: 50px auto 0; width: 77px; }
 .main-gallery-container .infomation_form .wrap .msg { margin-top: 30px; padding: 0 15px; text-align: center; }
 .main-gallery-container .infomation_form .wrap .link{ margin: 30px 0 20px; text-align: center; }
@@ -44,7 +44,7 @@ height: 74px; margin: 50px auto 0; width: 77px; }
 color: #FFFFFF; display: inline-block; font-size: 14px; font-weight: bold; padding: 10px 20px;  text-decoration: none; }
 
 #full_wrapper .upload_message{ display:none; width:96%; margin:0 auto 15px; background:#0074a2; padding:15px 0; text-align:center; color:#fff; font-size:14px; }
-#full_wrapper .upload_message span.up_image{ width:21px; height:21px; background: url("../../img/alert_icon.png"); margin-right:15px; display:inline-block; vertical-align:middle;}
+#full_wrapper .upload_message span.up_image{ width:21px; height:21px; background: url("../../assets/img/alert_icon.png"); margin-right:15px; display:inline-block; vertical-align:middle;}
 #full_wrapper .upload_message span.bold{ font-weight:bold; }
 
 #full_wrapper .upload_error_message{ background:#d85117; padding:15px 0; }

@@ -65,7 +65,7 @@ jQuery(document).ready(function() {
             url: ajax_object.ajax_url,
             type: 'POST',
             dataType: 'json',
-            data: "action=discconet_account&account_name=" + CurRel,
+            data: "action=sp_discconet_account&account_name=" + CurRel,
             success: function(data) {
                 if (data.success) {
                     jQuery('#' + CurRel + '_throbber').addClass('displaynone');
@@ -305,7 +305,7 @@ function editDMCvideo(mediaId) {
         url: ajax_object.ajax_url,
         type: 'POST',
         dataType: 'html',
-        data: 'action=edit_dm_cloud_records&mediaId=' + mediaId + '&curpage=' + CurPage,
+        data: 'action=sp_edit_dm_cloud_records&mediaId=' + mediaId + '&curpage=' + CurPage,
         success: function(data) {
             //jQuery("div.overlay").hide();
             jQuery("div.loading-image-container").fadeOut();
@@ -329,7 +329,7 @@ function edit_sample_video(mediaId) {
         url: ajax_object.ajax_url,
         type: 'POST',
         dataType: 'html',
-        data: 'action=edit_sample_records&mediaId=' + mediaId + '&curpage=' + CurPage,
+        data: 'action=sp_edit_sample_records&mediaId=' + mediaId + '&curpage=' + CurPage,
         success: function(data) {
             jQuery("div.loading-image-container").fadeOut();
             //jQuery("div.loading-image-container").hide();
@@ -497,7 +497,7 @@ function secondsTimeSpanToHMS(s) {
 
 function deleteMetatags(mediaId, key) {
     var data = {
-        action: 'delete_dm_cloud_metatags',
+        action: 'sp_delete_dm_cloud_metatags',
         mediaId: mediaId,
         key: key
     };
@@ -507,7 +507,7 @@ function deleteMetatags(mediaId, key) {
     });
 }
 
-function getDMCupdatedvalues() {
+function getDMCsp_updatedvalues() {
     //Validating key values
     var error = '';
     if (jQuery("#video-title").val() == '') {
@@ -540,16 +540,16 @@ function getDMCupdatedvalues() {
         return false;
     }
     var tags = '';
-    var counterdata = jQuery('#dm_update_form').serialize();
+    var counterdata = jQuery('#dm_sp_update_form').serialize();
     jQuery.ajax({
         url: ajax_object.ajax_url,
         type: 'POST',
         dataType: 'json',
-        data: 'action=update_dm_cloud_metatags&' + counterdata,
+        data: 'action=sp_update_dm_cloud_metatags&' + counterdata,
         success: function(data) {
             if (data) {
                 jQuery("#dmc-message").addClass('success-msg');
-                jQuery("#dmc-message").html("Video meta update successfully.").show();
+                jQuery("#dmc-message").html("Video meta sp_update successfully.").show();
                 setTimeout("location.reload(true);", 2000);
             }
         },
@@ -559,7 +559,7 @@ function getDMCupdatedvalues() {
     });
 }
 
-function getSampleupdatedvalues() {
+function getSamplesp_updatedvalues() {
     jQuery("div.title-wrap").removeClass("missing-value");
     jQuery("div.channel-wrap").removeClass("missing-value");
     if (jQuery("#video-title").val() == '') {
@@ -572,16 +572,16 @@ function getSampleupdatedvalues() {
         jQuery("#dm-message").html("Some information is missing. We've highlighted the fields above for you.").show();
         return false;
     }
-    var counterdata = jQuery('#dm_update_form').serialize();
+    var counterdata = jQuery('#dm_sp_update_form').serialize();
     jQuery.ajax({
         url: ajax_object.ajax_url,
         type: 'POST',
         dataType: 'json',
-        data: 'action=update_sample_datas&' + counterdata,
+        data: 'action=sp_update_sample_datas&' + counterdata,
         success: function(data) {
             if (data) {
                 jQuery("#dm-message").addClass('success-msg');
-                jQuery("#dm-message").html("Video data update successfully.").show();
+                jQuery("#dm-message").html("Video data sp_update successfully.").show();
                 setTimeout("location.reload(true);", 2000);
             }
         },

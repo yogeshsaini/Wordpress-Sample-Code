@@ -48,7 +48,7 @@
         }
 
         // instantiate variables
-        // cX, cY = current X and Y position of mouse, updated by mousemove event
+        // cX, cY = current X and Y position of mouse, sp_updated by mousemove event
         // pX, pY = previous X and Y position of mouse, set by mouseover and polling interval
         var cX, cY, pX, pY;
 
@@ -95,7 +95,7 @@
             if (e.type == "mouseenter") {
                 // set "previous" X and Y position based on initial entry point
                 pX = ev.pageX; pY = ev.pageY;
-                // update "current" X and Y position based on mousemove
+                // sp_update "current" X and Y position based on mousemove
                 $(ob).on("mousemove.hoverIntent",track);
                 // start polling interval (self-calling timeout) to compare mouse coordinates over time
                 if (ob.hoverIntent_s != 1) { ob.hoverIntent_t = setTimeout( function(){compare(ev,ob);} , cfg.interval );}

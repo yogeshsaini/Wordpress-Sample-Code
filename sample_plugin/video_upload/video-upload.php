@@ -15,7 +15,7 @@ class Video_Upload
                                 }
                                 add_action( 'admin_menu', array(
                                                  $this,
-                                                'add_video_upload_page' 
+                                                'sp_add_video_upload_page' 
                                 ) );
                                 add_action( 'admin_enqueue_scripts', array(
                                                  $this,
@@ -31,24 +31,24 @@ class Video_Upload
                                 ), 1, 1 );
                                 add_action( 'wp_ajax_plupload_action', array(
                                                  $this,
-                                                "cloud_and_dm_upload_action" 
+                                                "sp_cloud_and_dm_upload_action" 
                                 ) );
                 }
                 /**
                  * Add options page
                  */
-                public function add_video_upload_page( )
+                public function sp_add_video_upload_page( )
                 {
                                 // This page will be under "Settings"
                                 add_submenu_page( 'dm-admin-setting', 'Upload', 'Upload', 'administrator', 'video-upload', array(
                                                  $this,
-                                                'create_video_upload_admin_page' 
+                                                'sp_create_video_upload_admin_page' 
                                 ) );
                 }
                 /**
                  * Options page callback
                  */
-                public function create_video_upload_admin_page( )
+                public function sp_create_video_upload_admin_page( )
                 {
                                 include_once( "video_upload_html.php" );
                 }
@@ -64,47 +64,47 @@ class Video_Upload
                                 ) ) ) {
                                                 
                                                 wp_enqueue_script( 'plupload-all' );
-                                                wp_register_script( 'video_plupload', $pluginurl . '/video_upload/js/video_plupload.js', array(
+                                                wp_register_script( 'video_plupload', $pluginurl . '/video_upload/assets/js/video_plupload.js', array(
                                                                  'jquery' 
                                                 ) );
                                                 wp_enqueue_script( 'video_plupload' );
                                                 wp_localize_script( 'video_plupload', 'video_plupload_object', array(
                                                                  'plugin_url' => SAMPLE_URL 
                                                 ) );
-                                                wp_register_style( 'video_plupload', $pluginurl . '/video_upload/css/video_plupload.css' );
+                                                wp_register_style( 'video_plupload', $pluginurl . '/video_upload/assets/css/video_plupload.css' );
                                                 wp_enqueue_style( 'video_plupload' );
                                                 
-                                                wp_register_style( 'sample.css', $pluginurl . '/css/sample.css', array( ), '2.5.9' );
+                                                wp_register_style( 'sample.css', $pluginurl . '/assets/css/sample.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'sample.css' );
                                                 
-                                                wp_register_style( 'jquery.fancybox-1.3.4.css', $pluginurl . '/css/jquery.fancybox-1.3.4.css', array( ), '2.5.9' );
+                                                wp_register_style( 'jquery.fancybox-1.3.4.css', $pluginurl . '/assets/css/jquery.fancybox-1.3.4.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'jquery.fancybox-1.3.4.css' );
                                                 
-                                                wp_register_style( 'jquery.tagsinput.css', $pluginurl . '/css/jquery.tagsinput.css', array( ), '2.5.9' );
+                                                wp_register_style( 'jquery.tagsinput.css', $pluginurl . '/assets/css/jquery.tagsinput.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'jquery.tagsinput.css' );
                                                 
-                                                wp_register_style( 'jquery-ui.css', $pluginurl . '/css/jquery-ui.css', array( ), '2.5.9' );
+                                                wp_register_style( 'jquery-ui.css', $pluginurl . '/assets/css/jquery-ui.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'jquery-ui.css' );
                                                 
-                                                wp_register_style( 'pagination.css', $pluginurl . '/css/pagination.css', array( ), '2.5.9' );
+                                                wp_register_style( 'pagination.css', $pluginurl . '/assets/css/pagination.css', array( ), '2.5.9' );
                                                 wp_enqueue_style( 'pagination.css' );
                                                 
-                                                wp_register_script( 'jquery.tagsinput.js', $pluginurl . '/js/jquery.tagsinput.js', array(
+                                                wp_register_script( 'jquery.tagsinput.js', $pluginurl . '/assets/js/jquery.tagsinput.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'jquery.tagsinput.js' );
                                                 
-                                                wp_register_script( 'jquery-ui.min.js', $pluginurl . '/js/jquery-ui.min.js', array(
+                                                wp_register_script( 'jquery-ui.min.js', $pluginurl . '/assets/js/jquery-ui.min.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'jquery-ui.min.js' );
                                                 
-                                                wp_register_script( 'jquery.fancybox-1.3.4.js', $pluginurl . '/js/jquery.fancybox-1.3.4.js', array(
+                                                wp_register_script( 'jquery.fancybox-1.3.4.js', $pluginurl . '/assets/js/jquery.fancybox-1.3.4.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'jquery.fancybox-1.3.4.js' );
                                                 
-                                                wp_register_script( 'sample.js', $pluginurl . '/js/sample.js', array(
+                                                wp_register_script( 'sample.js', $pluginurl . '/assets/js/sample.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9' );
                                                 wp_enqueue_script( 'sample.js' );
@@ -113,14 +113,14 @@ class Video_Upload
                                                                  'ajax_url' => admin_url( 'admin-ajax.php' ) 
                                                 ) );
                                                 
-                                                wp_enqueue_script( 'ajax-upload-pattern', $pluginurl . '/js/ajax-upload_pattern.js', array(
+                                                wp_enqueue_script( 'ajax-upload-pattern', $pluginurl . '/assets/js/ajax-upload_pattern.js', array(
                                                                  'jquery' 
                                                 ), 1.0 );
                                                 wp_localize_script( 'ajax-upload-pattern', 'ajax_object_another', array(
                                                                  'ajaxurl' => admin_url( 'admin-ajax.php' ) 
                                                 ) );
                                                 
-                                                wp_register_script( 'analytic', $pluginurl . '/js/analytic.js', array(
+                                                wp_register_script( 'analytic', $pluginurl . '/assets/js/analytic.js', array(
                                                                  'jquery' 
                                                 ), '2.5.9', true );
                                                 wp_enqueue_script( 'analytic' );
@@ -171,7 +171,7 @@ class Video_Upload
                 /**
                  * Options page callback
                  */
-                public function cloud_and_dm_upload_action( )
+                public function sp_cloud_and_dm_upload_action( )
                 {
                                 $video_id = $_POST["video_id"];
                                 check_ajax_referer( $video_id . 'pluploadan' );

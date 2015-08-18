@@ -28,7 +28,7 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
                 public function get_sample_cloud_userInfo( )
                 {
@@ -41,7 +41,7 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
                 public function get_connected_Information( )
                 {
@@ -80,7 +80,7 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
                 public function delete_sample_cloud_media( $media_id = NULL )
                 {
@@ -99,7 +99,7 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
                 public function get_sample_cloud_player( )
                 {
@@ -119,7 +119,7 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
                 public function get_sample_cloud_channels( )
                 {
@@ -152,9 +152,9 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
-                public function get_sample_cloud_videos( $page_no = 1, $per_page = 10, $search_title = '', $filter = '-created' )
+                public function sp_get_sample_cloud_videos( $page_no = 1, $per_page = 10, $search_title = '', $filter = '-created' )
                 {
                                 $result = array( );
                                 try {
@@ -201,14 +201,14 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                                                 return ( $result );
                                 }
                                 catch ( Exception $e ) {
-                                                $this->log_error( $e->getMessage() . ' in class.cloud.php function name get_sample_cloud_videos', 'phparray', $e->getLine(), $e->getFile() );
+                                                $this->log_error( $e->getMessage() . ' in class.cloud.php function name sp_get_sample_cloud_videos', 'phparray', $e->getLine(), $e->getFile() );
                                 }
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
-                public function get_sample_cloud_videosDetails( $media_id = null )
+                public function sp_get_sample_cloud_videosDetails( $media_id = null )
                 {
                                 $result = array( );
                                 try {
@@ -253,14 +253,14 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                                                 }
                                 }
                                 catch ( Exception $e ) {
-                                                $this->log_error( $e->getMessage() . ' in class.cloud.php function name get_sample_cloud_videosDetails', 'phparray', $e->getLine(), $e->getFile() );
+                                                $this->log_error( $e->getMessage() . ' in class.cloud.php function name sp_get_sample_cloud_videosDetails', 'phparray', $e->getLine(), $e->getFile() );
                                 }
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
-                public function get_sample_cloud_videosKeywords( $media_id = null )
+                public function sp_get_sample_cloud_videosKeywords( $media_id = null )
                 {
                                 try {
                                                 if ( !empty( $media_id ) ) {
@@ -285,12 +285,12 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                                                 }
                                 }
                                 catch ( Exception $e ) {
-                                                $this->log_error( $e->getMessage() . ' in class.cloud.php function name get_sample_cloud_videosKeywords', 'phparray', $e->getLine(), $e->getFile() );
+                                                $this->log_error( $e->getMessage() . ' in class.cloud.php function name sp_get_sample_cloud_videosKeywords', 'phparray', $e->getLine(), $e->getFile() );
                                 }
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
                 public function set_sample_cloud_video_metas( $media_id = null, $args = array( ) )
                 {
@@ -311,7 +311,7 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
                 public function remove_sample_cloud_video_metas( $media_id = null, $args = array( ) )
                 {
@@ -331,7 +331,7 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
                 public function set_sample_cloud_video_thumbnail( $media_id = null, $url = NULL )
                 {
@@ -351,7 +351,7 @@ class Sample_Cloud_OwnMethod extends ErrorReporting
                 }
                 
                 /**
-                 * Method to update sample video
+                 * Method to sp_update sample video
                  */
                 public function upload_sample_cloud_video( $video_url = null, $file_name = null )
                 {

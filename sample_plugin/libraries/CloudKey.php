@@ -274,7 +274,7 @@ class CloudKey_Api
         curl_setopt_array($ch, array
         (
             CURLOPT_URL => $this->endpoint,
-            CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
+            CURLOPT_HTTPHEADER => array('Content-Type: application/assets/json'),
             CURLOPT_POSTFIELDS => json_encode($request),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
