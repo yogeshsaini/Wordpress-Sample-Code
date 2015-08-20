@@ -68,13 +68,13 @@
             <a class="sub_link" id="sub_link" target="_balnk" href="#sample_form_popup"><?php _e('or create a sample account', 'sample'); ?></a>
          </div>
       </div>
-      <div style="display: none">
-         <div id="sample_form_popup" style="float:left;">
+      <div>
+         <div id="sample_form_popup">
             <div class="connect_heading">Connect to Sample.com</div>
             <div class="wrap11">
                <form id="sample_outh_form" method="post" action="options.php" onsubmit="return sample_settings_form_submit(this);">
                   <?php settings_fields('sample_option_group'); do_settings_sections('sample-outh-setting'); ?>
-                  <div id="sample_message" style="display:none"></div>
+                  <div id="sample_message"></div>
                   <?php submit_button('Save'); ?>
                   <p class="submit">Don't have an API Key yet? <a href="javascript:void(0);" class="show_account_desc">Create one</a></p>
                </form>
@@ -137,8 +137,8 @@
    </div>
    <?php if (   empty(  $options1   )  ) : ?>
    <?php //settings_errors(); ?>
-   <div style="display: none">
-      <div id="cloud_form_popup" style="float:left;">
+   <div>
+      <div id="cloud_form_popup">
          <div class="connect_heading"><?php _e('Connect to Sample Cloud', 'sample'); ?></div>
          <div class="wrap11">
             <form id="cloud_settings_form" method="post" action="options.php" onsubmit="return cloud_settings_form_submit(this);">

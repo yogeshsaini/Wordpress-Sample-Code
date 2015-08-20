@@ -106,7 +106,7 @@ class Dmc_Front_Outh_Form {
       </div>
       </div>
       <div style="display: none">
-        <div id="cloud_form_popup" style="float:left;">
+        <div id="cloud_form_popup">
            <div class="connect_heading"><?php _e( 'Connect to Sample Cloud', 'sample' ); ?></div>
            <div class="wrap11">
               <form onsubmit="return cloud_settings_form_submit(this);" action="options.php" method="post" id="cloud_settings_form">
